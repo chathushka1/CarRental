@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+
+
+
+</head>
+<body>
+<div>
+    <div class="container text-center"  id="customerContent">
+
+        <div class="row align-items-start">
+            <div class="col">
+                <!--<h2 class="text-primary text-center m-lg-100 pt-5 " >Customer Details</h2>-->
+                <section class="container col border-warning m-4 border rounded object-fit-contain  me-auto ms-20 mb-10">
+
+                    <div class="row">
+                        <div class="col" style="background-image: radial-gradient(circle at top,white,blue)">
+                            <h2 class="text-danger text-center m-lg-100 pt-3  text-primary" >Customer</h2>
+                            <form class="row p-4 m-0 m-lg-2  justify-content-center" id="customerForm">
+                                <div class="mb-3">
+                                    <label for="txtCustomerID" class="text-light bg-dark form-label " id="cId">Customer Id</label>
+                                    <input type="text" name="cusId" class="form-control" id="txtCustomerID" aria-describedby="emailHelp">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="txtCustomerName" class="text-light bg-dark form-label">Customer Name</label>
+                                    <input type="text" name="cusName" class="form-control" id="txtCustomerName">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="txtCustomerAddress" class="text-light bg-dark form-label">Customer Address</label>
+                                    <input type="text" name="cusAddress" class="form-control" id="txtCustomerAddress">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="txtEmail" class="text-light bg-dark form-label">Email</label>
+                                    <input type="text" name="cusEmail" class="form-control" id="txtEmail">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="txtNic" class="text-light bg-dark form-label">NIC</label>
+                                    <input type="text" name="cusNic" class="form-control" id="txtNic">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="txtNicPhoto" class="text-light bg-dark form-label">NIC Photo</label>
+                                    <input type="file" name="cusNicPhoto" class="form-control" id="txtNicPhoto">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="txtDrivingLicen" class="text-light bg-dark form-label">Driving Licen</label>
+                                    <input type="text" name="cusDrivingLicen" class="form-control" id="txtDrivingLicen">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="txtDrivingLicenPhoto" class="text-light bg-dark form-label">Driving Licen Photo Photo</label>
+                                    <input type="file" name="drivingLicenPhoto" class="form-control" id="txtDrivingLicenPhoto">
+                                </div>
+
+
+
+                                <button id="btnCusSave" type="button" style="width: 150px" class="btn btn-success m-auto m-lg-2 justify-content-center" >Save</button>
+                                <button id="btnCusUpdate" type="button" style="width: 150px" class="btn btn-info m-auto m-lg-2">Update</button>
+                                <button id="btnCusDelete" type="button" style="width: 150px" class="btn btn-danger m-auto m-lg-2">Delete</button>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </section>
+
+            </div>
+           <!-- <div class="col">
+
+                <div class="col">
+
+                    <section class="container col border-warning m-4 border rounded object-fit-contain  me-auto ms-20 mb-10">
+
+                        <h2 class="text-danger text-center m-lg-3 pb-3" >Customer Details</h2>
+                        <table class="table table-light table-striped" id="tables">
+                            <thead>
+                            <tr>
+                                <th style="background-color: #fd7e14" scope="col">Id</th>
+                                <th style="background-color: #fd7e14" scope="col">Name</th>
+                                <th style="background-color: #fd7e14" scope="col">Address</th>
+                                <th style="background-color: #fd7e14" scope="col">Salary</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tblCustomer">
+                            <tr>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                    </section>
+
+                    </section>
+                </div>
+
+            </div>-->
+        </div>
+
+
+
+    </div>
+
+</div>
+<script src="../assets/js/bootstrap.js"></script>
+<script src="../assets/js/jquery-3.6.1.min.js"></script>
+</body>
+</html>
