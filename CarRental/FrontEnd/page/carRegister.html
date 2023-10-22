@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Car Add</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+
 </head>
 <body>
 <div>
-    <div class="container text-center"  id="customerContent">
+    <div class="container text-center"  id="carContent">
 
         <div class="row align-items-start">
             <div class="col">
@@ -21,15 +23,27 @@
                                     <label for="txtVehicleID" class="text-black form-label" id="cId">Vehicle Id</label>
                                     <input type="text" name="vId" class="form-control" id="txtVehicleID" aria-describedby="emailHelp">
                                 </div>
+
+                                <div class="col-md-6 mb3">
+                                    <label for="txtRegisterNumber" class="text-black form-label">Register Number</label>
+                                    <input type="text" name="vRegisterNumber" class="form-control" id="txtRegisterNumber">
+                                </div>
+
+                                <div class="col-md-6 mb3">
+                                    <label for="txtVehicleType" class="text-black form-label">Vehicle Type</label>
+                                    <!--<input type="text" name="vType" class="form-control" id="txtVehicleType">-->
+                                    <select aria-label="Default select example" class="form-select fs-5" style="height: 38px" id="txtVehicleType">
+                                        <option value="1">General Cars</option>
+                                        <option value="2">Premium Cars</option>
+                                        <option value="3">Luxury Cars</option>
+                                    </select>
+                                </div>
+
                                 <div class="col-md-6 mb3">
                                     <label for="txtVehicleBrand" class="text-black form-label">Vehicle Brand</label>
                                     <input type="text" name="vBrand" class="form-control" id="txtVehicleBrand">
                                 </div>
 
-                                <div class="col-md-6 mb3">
-                                    <label for="txtVehicleType" class="text-black form-label">Vehicle Type</label>
-                                    <input type="text" name="vType" class="form-control" id="txtVehicleType">
-                                </div>
 
                                 <div class="col-md-6 mb3">
                                     <label for="txtVehicleColor" class="text-black form-label">Vehicle Color</label>
@@ -37,26 +51,95 @@
                                 </div>
 
                                 <div class="col-md-6 mb3">
-                                    <label for="txtVehicleTransmissionType" class="text-black form-label">Vehicle Transmission Type</label>
-                                    <input type="text" name="vColor" class="form-control" id="txtVehicleTransmissionType">
+                                    <label for="txtVehicleTransmissionType" class="text-black form-label">Transmission Type</label>
+                                    <!--<input type="text" name="vTransmission" class="form-control" id="txtVehicleTransmissionType">-->
+                                    <select aria-label="Default select example" class="form-select fs-5" style="height: 38px" id="txtVehicleTransmissionType">
+                                        <option value="1">Manual</option>
+                                        <option value="2">Auto</option>
+                                    </select>
                                 </div>
 
-
-
-
-                                <div class="mb-3">
-                                    <label for="txtNicPhoto" class="text-black form-label">NIC Photo</label>
-                                    <input type="file" name="cusNicPhoto" class="form-control" id="txtNicPhoto">
+                                <div class="col-md-6 mb3">
+                                    <label for="txtVehicleFuelType" class="text-black form-label">Fuel Type</label>
+                                    <!--<input type="text" name="vFuel" class="form-control" id="txtVehicleFuelType">-->
+                                    <select aria-label="Default select example" class="form-select fs-5" style="height: 38px" id="txtVehicleFuelType">
+                                        <option value="1">Petrol</option>
+                                        <option value="2">Diesel</option>
+                                        <option value="3">Electrical</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-md-6 mb3">
+                                    <label for="txtNOPassenger" class="text-black form-label">Number Of Passenger</label>
+                                    <input type="text" name="vNOPassenger" class="form-control" id="txtNOPassenger">
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="txtDrivingLicen" class="text-black form-label">Driving Licen</label>
-                                    <input type="text" name="cusDrivingLicen" class="form-control" id="txtDrivingLicen">
+                                <div class="col-md-6 mb3">
+                                    <label for="txtDailyRatePrice" class="text-black form-label">Daily Rate Price</label>
+                                    <input type="text" name="vDailyRatePrice" class="form-control" id="txtDailyRatePrice">
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="txtDrivingLicenPhoto" class="text-black form-label">Driving Licen Photo Photo</label>
-                                    <input type="file" name="drivingLicenPhoto" class="form-control" id="txtDrivingLicenPhoto">
+                                <div class="col-md-6 mb3">
+                                    <label for="txtMonthlyRatePrice" class="text-black form-label">Monthly Rate Price</label>
+                                    <input type="text" name="vMonthlyRatePrice" class="form-control" id="txtMonthlyRatePrice">
+                                </div>
+
+                                <div class="col-md-6 mb3">
+                                    <label for="txtFreeKmForDay" class="text-black form-label">Free Km For Day</label>
+                                    <input type="text" name="vFreeKmForDay" class="form-control" id="txtFreeKmForDay">
+                                </div>
+
+                                <div class="col-md-6 mb3">
+                                    <label for="txtFreeKmForMonth" class="text-black form-label">Free Km For Month</label>
+                                    <input type="text" name="vFreeKmForMonth" class="form-control" id="txtFreeKmForMonth">
+                                </div>
+
+                                <div class="col-md-6 mb3">
+                                    <label for="txtPricePerExtraKm" class="text-black form-label">Price Per Extra Km</label>
+                                    <input type="text" name="vPricePerExtraKm" class="form-control" id="txtPricePerExtraKm">
+                                </div>
+
+                                <div class="col-md-6 mb3">
+                                    <label for="txtWholeKm" class="text-black form-label">Whole Km</label>
+                                    <input type="text" name="vWholeKm" class="form-control" id="txtWholeKm">
+                                </div>
+
+                                <div class="col-md-6 mb3">
+                                    <label for="txtUnderMaintain" class="text-black form-label">Under Maintain ?</label>
+                                    <!--<input type="text" name="vUnderMaintain" class="form-control" id="txtUnderMaintain">-->
+                                    <select aria-label="Default select example" class="form-select fs-5" style="height: 38px" id="txtUnderMaintain">
+                                        <option value="1">Yes</option>
+                                        <option value="2">No</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 mb3">
+                                    <label for="txtAvailable" class="text-black form-label">Available ?</label>
+                                    <!--<input type="text" name="vAvailable" class="form-control" id="txtAvailable">-->
+                                    <select aria-label="Default select example" class="form-select fs-5" style="height: 38px" id="txtAvailable">
+                                        <option value="1">Available</option>
+                                        <option value="2">Not Available</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 mb3">
+                                    <label for="txtFrontView" class="text-black form-label">Front View</label>
+                                    <input type="file" name="vFrontView" class="form-control" id="txtFrontView">
+                                </div>
+
+                                <div class="col-md-6 mb3">
+                                    <label for="txtBackView" class="text-black form-label">Back View</label>
+                                    <input type="file" name="vBackView" class="form-control" id="txtBackView">
+                                </div>
+
+                                <div class="col-md-6 mb3">
+                                    <label for="txtSideView" class="text-black form-label">Side View</label>
+                                    <input type="file" name="vSideView" class="form-control" id="txtSideView">
+                                </div>
+
+                                <div class="col-md-6 mb3">
+                                    <label for="txtInterior" class="text-black form-label">Interior</label>
+                                    <input type="file" name="vInterior" class="form-control" id="txtInterior">
                                 </div>
 
 
@@ -74,9 +157,8 @@
             </div>
         </div>
     </div>
-
-
-
-    </div>
+</div>
+<script src="../assets/js/bootstrap.js"></script>
+<script src="../assets/js/jquery-3.6.1.min.js"></script>
 </body>
 </html>
