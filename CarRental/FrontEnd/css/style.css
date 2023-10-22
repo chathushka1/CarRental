@@ -8,6 +8,23 @@ body{
     position: relative;
 }
 
+.square1{
+    position: absolute;
+    width: 1350px;
+    height: 350px;
+    left: 0px;
+    margin: auto;
+    background: #31302e;
+}
+.square2{
+    position: absolute;
+    width: 450px;
+    height: 350px;
+    left: 450px;
+    margin: auto;
+    background: #232221;
+}
+
 /* CSS for the right navigation bar */
 .sidebar {
     position: fixed;
