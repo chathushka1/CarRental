@@ -5,8 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  * `@authority` Chathushka Madumal
@@ -31,4 +33,9 @@ public class Customer {
     private String licenseNumber;
     private String nicPhoto;
     private String licensePhoto;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
+
+
 }

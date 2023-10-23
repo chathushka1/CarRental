@@ -27,4 +27,6 @@ public class CustomerDTO {
     private String licenseNumber;
     private String nicPhoto;
     private String licensePhoto;
+
+    private UserDTO users;
 }
