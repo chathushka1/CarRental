@@ -25,4 +25,8 @@ body{
     background: #232221;
 }
 
-
+.carImage{
+    position: absolute;
+    width: 800px;
+    height: 650px;
+}
