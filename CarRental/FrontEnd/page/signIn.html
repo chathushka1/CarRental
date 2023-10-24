@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <title>Sign in</title>
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/signIn.css">
 
 </head>
 <body>
-<div>
+<!--<div>
     <div class="container text-center"  id="signInContent">
 
         <div class="row align-items-start">
@@ -19,7 +20,7 @@
                             <h2 class="text-danger text-center m-lg-100 pt-3  text-primary" >Sign In</h2>
                             <form class="row p-4 m-0 m-lg-2  justify-content-center" id="signInForm">
                                 <div class="mb-3">
-                                    <!--col-md-6 mb3-->
+                                    &lt;!&ndash;col-md-6 mb3&ndash;&gt;
                                     <label for="txtUserName" class="text-black form-label" id="dId">User Name</label>
                                     <input type="text" name="userName" class="form-control" id="txtUserName" aria-describedby="emailHelp">
                                 </div>
@@ -40,6 +41,50 @@
                 </section>
 
             </div>
+        </div>
+    </div>
+</div>-->
+<div class="container">
+    <form>
+        <div class="row">
+            <h2 style="text-align:center">Login with Social Media or Manually</h2>
+            <div class="vl">
+                <span class="vl-innertext">or</span>
+            </div>
+
+            <div class="col">
+                <a href="#" class="fb btn">
+                    <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+                </a>
+                <a href="#" class="twitter btn">
+                    <i class="fa fa-twitter fa-fw"></i> Login with Twitter
+                </a>
+                <a href="#" class="google btn">
+                    <i class="fa fa-google fa-fw"></i> Login with Google+
+                </a>
+            </div>
+
+            <div class="col">
+                <div class="hide-md-lg">
+                    <p>Or sign in manually:</p>
+                </div>
+
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="submit" value="Login">
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<div class="bottom-container">
+    <div class="row">
+        <div class="col">
+            <a href="#" style="color:white" class="btn">Sign up</a>
+        </div>
+        <div class="col">
+            <a href="#" style="color:white" class="btn">Forgot password?</a>
         </div>
     </div>
 </div>
