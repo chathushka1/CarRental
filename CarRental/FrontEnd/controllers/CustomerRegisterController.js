@@ -122,3 +122,32 @@ function updateCustomer(id) {
     }
 
 }
+
+function generateRegisterIds() {
+    $("#generateCusId").text("C00-0001");
+    var test = "id";
+
+    $.ajax({
+
+        url: BASE_URL+"customer?test="+test,
+        method: "GET",
+        success: function (response) {
+            var customerId = response.data;
+            var tempId = parseInt(customerId.split("-")[1]);
+            tempId = tempId + 1;
+            if (tempId <= 9) {
+                $("#generateCusId").text("C00-000" + tempId);
+            } else if (tempId <= 99) {
+                $("#generateCusId").text("C00-00" + tempId);
+            } else if (tempId <= 999) {
+                $("#generateCusId").text("C00-0" + tempId);
+            } else {
+                $("#generateCusId").text("C00-" + tempId);
+            }
+
+        },
+        error: function (ob, statusText, error) {
+
+        }
+    });
+}
