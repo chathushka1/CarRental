@@ -10,7 +10,7 @@ $("#btnCusSave").click(function () {
 
     saveCustomer();
 });
-function saveCustomer() {
+/*function saveCustomer() {
     let customerID = $("#txtCustomerID").val();
     //check customer is exists or not?
     if (searchCustomer(customerID.trim()) == undefined) {
@@ -35,7 +35,45 @@ function saveCustomer() {
     } else {
         alert("Customer already exits.!");
     }
+}*/
+
+function saveCustomer(){
+   /* var user={
+        userId:$("#generateUserId").text(),
+        username:$("#registerUsername").val(),
+        password:$("#registerPassword").val(),
+    }*/
+
+        let cusId= $("#txtCustomerID").text();
+        let cusName =$("#txtCustomerName").val();
+        let cusAddress=$("#txtCustomerAddress").val();
+        let cusEmail=$("#txtEmail").val();
+        let cusContact=$("#txtContact").val();
+        let cusNIC=$("#txtNic").val();
+        let cusDLicense=$("#txtDrivingLicense").val();
+        let cusNicPhoto=$("#txtNicPhoto").val();
+        let cusDLicensePhoto=$("#txtDrivingLicenPhoto").val();
+
+
+    $.ajax({
+        url:BASE_URL+"customer",
+        method:"POST",
+        contentType:"application/json",
+        data: JSON.stringify(cusDetails),
+        success:function (resp) {
+            if (resp.message==200){
+
+            }
+
+
+        },
+        error:function (error) {
+            console.log(error);
+        }
+    });
+
 }
+
 
 $("#btnCusUpdate").click(function () {
     let id = $("#txtCustomerID").val();
@@ -67,6 +105,41 @@ function searchCustomer(id) {
         }
     });
     return resp;
+}
+
+function getAllCustomers() {
+    $.ajax({
+        url: BASE_URL + 'customer',
+        dataType: "json",
+        headers:{
+            Auth:"user=admin,pass=admin"
+        },
+        success: function (response) {
+            let customers = response.data;
+            for (let i in customers) {
+                let cus = customers[i];
+                let cusId = cus.cusId;
+                let cusName = cus.cusName;
+                let cusAddress = cus.cusAddress;
+                let cusEmail = cus.cusEmail;
+                let cusContact = cus.cusContact;
+                let cusNic = cus.cusNic;
+                let cusLicenseNum = cus.cusLicenseNum;
+                let cusNicPhoto = cus.cusNicPhoto;
+                let cusLicensePhoto = cus.cusLicensePhoto;
+
+
+                let row = `<tr><td>${cusId}</td><td>${cusName}</td><td>${cusAddress}</td><td>${cusEmail}</td>
+                            <td>${cusContact}</td><td>${cusNic}</td><td>${cusLicenseNum}</td><td>${cusNicPhoto}</td>
+                            <td>${cusLicensePhoto}</td></tr>`;
+                $("#tblCustomer").append(row);
+            }
+
+        },
+        error: function (error) {
+            alert(error.responseJSON.message);
+        }
+    });
 }
 
 
