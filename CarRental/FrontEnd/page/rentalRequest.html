@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../assets/css/bootstrap.css">
+
+</head>
+<body>
+<div>
+    <div class="row text-center"><h1 class="h1 display-5">Rental Requests</h1></div>
+    <div class="row ms-0 me-0">
+        <div class="col-3">
+            <div class="mb-3">
+                <label for="txtRentId" class="form-label mb-0">Rent ID</label>
+                <input type="text" class="form-control" id="txtRentId"
+                       name="rentId">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <label for="txtDate" class="form-label mb-0">Date</label>
+                <input type="text" class="form-control" id="txtDate"
+                       name="date">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <label for="txtPickupDate" class="form-label mb-0">Pickup Date</label>
+                <input type="text" class="form-control" id="txtPickupDate"
+                       name="pickupDate">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <label for="txtReturnDate" class="form-label mb-0">Return Date</label>
+                <input type="text" class="form-control" id="txtReturnDate"
+                       name="returnDate">
+            </div>
+        </div>
+    </div>
+    <div class="row ms-0 me-0">
+        <div class="col-3">
+            <div class="mb-3">
+                <label for="txtCarRegistrationNo" class="form-label mb-0">Car Registration
+                    No</label>
+                <input type="text" class="form-control" id="txtCarRegistrationNo"
+                       name="regNo">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <label for="txtCusId" class="form-label mb-0">Customer ID</label>
+                <input type="text" class="form-control" id="txtCusId"
+                       name="cusId">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <label for="txtDLicenceNo" class="form-label mb-0">Driver Licence No</label>
+                <input type="text" class="form-control" id="txtDLicenceNo"
+                       name="dLicenceNo">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="mb-3">
+                <label for="txtRentalStatus" class="form-label mb-0">Status</label>
+                <input type="text" class="form-control" id="txtRentalStatus"
+                       name="rentalStatus">
+            </div>
+        </div>
+    </div>
+    <div class="row m-3">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <button type="button" class="btn btn-success mt-3 " id="btnRentalAccept">Accept</button>
+            <button type="button" class="btn btn-danger mt-3" id="btnRentalReject">Reject</button>
+            <button type="button" class="btn btn-secondary mt-3" id="btnClearRental">Clear</button>
+        </div>
+    </div>
+    </div>
+    <script src="../assets/js/bootstrap.bundle.js"></script>
+    <script src="../assets/js/bootstrap.js"></script>
+    <script src="../assets/js/jquery-3.6.1.min.js"></script>
+</body>
+</html>
