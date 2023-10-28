@@ -24,7 +24,7 @@ import javax.persistence.OneToOne;
 @ToString
 public class Customer {
    @Id
-    private String cID;
+    private String cId;
     private String name;
     private String address;
     private String eMail;
