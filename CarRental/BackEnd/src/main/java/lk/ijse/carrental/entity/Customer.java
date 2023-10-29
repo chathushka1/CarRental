@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -34,7 +35,7 @@ public class Customer {
     private String licenseNumber;
     private String nicPhoto;
     private String licensePhoto;
-    private Date date;
+    private LocalDate date;
 
 
     @OneToOne(cascade = CascadeType.ALL)

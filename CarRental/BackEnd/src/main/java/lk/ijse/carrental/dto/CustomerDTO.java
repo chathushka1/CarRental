@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -29,7 +30,7 @@ public class CustomerDTO {
     private String licenseNumber;
     private String nicPhoto;
     private String licensePhoto;
-    private Date date;
+    private LocalDate date;
 
     private UserDTO users;
 }
