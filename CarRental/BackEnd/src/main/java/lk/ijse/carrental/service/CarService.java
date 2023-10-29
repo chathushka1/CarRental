@@ -1,6 +1,7 @@
 package lk.ijse.carrental.service;
 
-import lk.ijse.carrental.dto.DriverDTO;
+import lk.ijse.carrental.dto.CarDTO;
+
 
 import java.util.List;
 
@@ -11,6 +12,11 @@ import java.util.List;
  * 2023-10-29
  * FrontEnd
  */
-public interface CarService {
 
+public interface CarService {
+    void addCar(CarDTO dto);
+    void deleteCar(String id);
+    List<CarDTO> getAllCar();
+    CarDTO findCar(String id);
+    void updateCar(CarDTO c);
 }

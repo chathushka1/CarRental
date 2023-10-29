@@ -1,7 +1,8 @@
 package lk.ijse.carrental.service.impl;
 
+import lk.ijse.carrental.dto.CarDTO;
 import lk.ijse.carrental.dto.DriverDTO;
-import lk.ijse.carrental.service.DriverService;
+import lk.ijse.carrental.service.CarService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,35 +11,35 @@ import java.util.List;
 /**
  * `@authority` Chathushka Madumal
  * hp
- * 08:20
- * 2023-10-27
+ * 19:36
+ * 2023-10-29
  * FrontEnd
  */
 @Service
 @Transactional
-public class DriverServiceImpl implements DriverService {
+public class CarServiceImpl implements CarService {
     @Override
-    public void addDriver(DriverDTO dto) {
+    public void addCar(CarDTO dto) {
 
     }
 
     @Override
-    public void deleteDriver(String id) {
+    public void deleteCar(String id) {
 
     }
 
     @Override
-    public List<DriverDTO> getAllDriver() {
+    public List<CarDTO> getAllCar() {
         return null;
     }
 
     @Override
-    public DriverDTO findDriver(String id) {
+    public CarDTO findCar(String id) {
         return null;
     }
 
     @Override
-    public void updateDriver(DriverDTO c) {
+    public void updateCar(CarDTO c) {
 
     }
 }
