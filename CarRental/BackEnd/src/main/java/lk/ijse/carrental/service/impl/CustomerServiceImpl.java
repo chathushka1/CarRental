@@ -37,4 +37,24 @@ public class CustomerServiceImpl implements CustomerService {
     public void updateCustomer(CustomerDTO c) {
 
     }
+
+    @Override
+    public int registeredCustomerCount() {
+        return 0;
+    }
+
+    @Override
+    public int dailyRegisteredCustomerCount(String date) {
+        return 0;
+    }
+
+    @Override
+    public CustomerDTO searchUserCustomer(String id) {
+        return null;
+    }
+
+    @Override
+    public CustomerDTO findCustomerToReserve(String nic) {
+        return null;
+    }
 }
