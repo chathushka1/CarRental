@@ -68,26 +68,29 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public int registeredCustomerCount() {
-        return 0;
+        return customerRepo.registeredCusCount();
     }
 
     @Override
     public int dailyRegisteredCustomerCount(String date) {
-        return 0;
+        return customerRepo.dailyRegisteredCusCount(date);
     }
+
 
     @Override
     public CustomerDTO searchUserCustomer(String id) {
-        return null;
+        Customer customer = customerRepo.searchCustomer(id);
+        return mapper.map(customer, CustomerDTO.class);
     }
 
     @Override
     public CustomerDTO findCustomerToReserve(String nic) {
-        return null;
+        Customer customer = customerRepo.searchCustomer(nic);
+        return mapper.map(customer, CustomerDTO.class);
     }
 
     @Override
     public String cusIdGenerate() {
-        return null;
+        return customerRepo.generateCId();
     }
 }
