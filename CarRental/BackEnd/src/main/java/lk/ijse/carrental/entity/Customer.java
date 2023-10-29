@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import java.util.Date;
 
 /**
  * `@authority` Chathushka Madumal
@@ -33,6 +34,8 @@ public class Customer {
     private String licenseNumber;
     private String nicPhoto;
     private String licensePhoto;
+    private Date date;
+
 
     @OneToOne(cascade = CascadeType.ALL)
     private User user;

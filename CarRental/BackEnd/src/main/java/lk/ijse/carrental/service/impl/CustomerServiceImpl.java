@@ -7,6 +7,9 @@ import lk.ijse.carrental.service.CustomerService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.List;
 
@@ -17,6 +20,8 @@ import java.util.List;
  * 2023-10-25
  * FrontEnd
  */
+@Service
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
     CustomerRepo customerRepo;

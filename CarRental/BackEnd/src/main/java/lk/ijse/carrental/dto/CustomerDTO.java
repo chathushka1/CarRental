@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Date;
+
 /**
  * `@authority` Chathushka Madumal
  * hp
@@ -27,6 +29,7 @@ public class CustomerDTO {
     private String licenseNumber;
     private String nicPhoto;
     private String licensePhoto;
+    private Date date;
 
     private UserDTO users;
 }

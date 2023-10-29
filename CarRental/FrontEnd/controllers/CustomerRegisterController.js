@@ -37,23 +37,32 @@ $("#btnCusSave").click(function () {
     }
 }*/
 
+
+var now = new Date();
+
+var day = ("0" + now.getDate()).slice(-2);
+var month = ("0" + (now.getMonth() + 1)).slice(-2);
+var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
 function saveCustomer(){
-   /* var user={
+    var user={
         userId:$("#generateUserId").text(),
         username:$("#registerUsername").val(),
         password:$("#registerPassword").val(),
-    }*/
-
-        let cusId= $("#txtCustomerID").text();
-        let cusName =$("#txtCustomerName").val();
-        let cusAddress=$("#txtCustomerAddress").val();
-        let cusEmail=$("#txtEmail").val();
-        let cusContact=$("#txtContact").val();
-        let cusNIC=$("#txtNic").val();
-        let cusDLicense=$("#txtDrivingLicense").val();
-        let cusNicPhoto=$("#txtNicPhoto").val();
-        let cusDLicensePhoto=$("#txtDrivingLicenPhoto").val();
-
+    }
+    var cusDetails= {
+        cId: $("#txtCustomerID").val(),
+        users:user,
+        registeredDate:today.toString(),
+        name :$("#txtCustomerName").val(),
+        address :$("#txtCustomerAddress").val(),
+        eMail: $("#txtEmail").val(),
+        contact: $("#txtContact").val(),
+        nic:$("#txtNic").val(),
+        licenseNumber: $("#txtDrivingLicense").val(),
+        nicPhoto: $("#txtNicPhoto").val(),
+        licensePhoto: $("#txtDrivingLicenPhoto").val()
+    }
 
     $.ajax({
         url:BASE_URL+"customer",
@@ -62,18 +71,46 @@ function saveCustomer(){
         data: JSON.stringify(cusDetails),
         success:function (resp) {
             if (resp.message==200){
-
+                registerUser(user);
+                generateRegisterIds();
             }
-
+            alert("Ok");
 
         },
         error:function (error) {
             console.log(error);
+            alert("Error");
         }
     });
 
 }
 
+
+function registerUser(users){
+    var user={
+        userId:users.userId,
+        username:users.username,
+        password:users.password,
+    }
+
+    $.ajax({
+        url:BASE_URL+"user",
+        method:"POST",
+        contentType:"application/json",
+        data: JSON.stringify(user),
+        success:function (resp) {
+            /*  alert(resp.message);*/
+            console.log(resp);
+            if (resp.message==200){
+
+            }
+
+        },
+        error:function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
 
 $("#btnCusUpdate").click(function () {
     let id = $("#txtCustomerID").val();
@@ -197,7 +234,7 @@ function updateCustomer(id) {
 }
 
 function generateRegisterIds() {
-    $("#generateCusId").text("C00-0001");
+    $("#txtCustomerID").text("C00-0001");
     var test = "id";
 
     $.ajax({
