@@ -74,7 +74,7 @@ function saveCustomer(){
                 registerUser(user);
                 generateRegisterIds();
             }
-            alert("Ok");
+            alert("Saved");
 
         },
         error:function (error) {

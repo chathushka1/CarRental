@@ -29,9 +29,15 @@ public class Car {
     private String vColor;
     private String vTransmissionType;
     private String vFuelType;
-    private String vNumberOfPassenger;
-    private String vFreeKmForDay;
-    private String vFreeKmForMonth;
-    private String vPricePerExtraKm;
-    private String vWholeKm;
+    private int vNumberOfPassenger;
+    private double vFreeKmForDay;
+    private double vFreeKmForMonth;
+    private double vPricePerExtraKm;
+    private double vWholeKm;
+    private String vUnderMaintain;
+    private String vAvailable;
+    private String vFrontView;
+    private String vBackView;
+    private String vSideView;
+    private String vInterior;
 }
