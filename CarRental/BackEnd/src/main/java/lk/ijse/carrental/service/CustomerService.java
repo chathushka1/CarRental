@@ -21,4 +21,5 @@ public interface CustomerService {
     int dailyRegisteredCustomerCount(String date);
     CustomerDTO searchUserCustomer(String id);
     CustomerDTO findCustomerToReserve(String nic);
+    String cusIdGenerate();
 }
