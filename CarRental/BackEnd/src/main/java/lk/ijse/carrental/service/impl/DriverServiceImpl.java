@@ -1,11 +1,13 @@
 package lk.ijse.carrental.service.impl;
 
+import lk.ijse.carrental.dto.CustomerDTO;
 import lk.ijse.carrental.dto.DriverDTO;
 import lk.ijse.carrental.entity.Customer;
 import lk.ijse.carrental.entity.Driver;
 import lk.ijse.carrental.repo.DriverRepo;
 import lk.ijse.carrental.service.DriverService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,7 +51,8 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public List<DriverDTO> getAllDriver() {
-        return null;
+        List<Driver> all = driverRepo.findAll();
+        return mapper.map(all, new TypeToken<List<DriverDTO>>() {}.getType());
     }
 
     @Override
