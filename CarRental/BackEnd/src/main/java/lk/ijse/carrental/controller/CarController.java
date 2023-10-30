@@ -39,4 +39,9 @@ public class CarController {
         carService.updateCar(dto);
         return new ResponseUtil("Ok", "Successfully Updated.",null);
     }
+    @DeleteMapping(params = {"id"},produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil deleteCar(@RequestParam String id){
+        carService.deleteCar(id);
+        return new ResponseUtil("Ok", "Successfully Deleted.",null);
+    }
 }
