@@ -53,4 +53,11 @@ public class DriverController {
     public ResponseUtil generateCustomerIds(@RequestParam String test) {
         return new ResponseUtil("Ok", "Successfully Searched.",driverService.generateDriverIds());
     }
+
+    @GetMapping(path ="/COUNT/{count}")
+    public ResponseUtil countRegisteredDriver(@PathVariable String count) {
+        return new ResponseUtil("Ok", "Successfully Searched.",driverService.countRegisteredDrivers());
+    }
+
+
 }

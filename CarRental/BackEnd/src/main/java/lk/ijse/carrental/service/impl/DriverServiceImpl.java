@@ -90,6 +90,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public DriverDTO findDriverToReserve(String nic) {
-        return null;
+        Driver driver = driverRepo.searchDriver(nic);
+        return mapper.map(driver, DriverDTO.class);
     }
 }
