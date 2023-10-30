@@ -24,8 +24,12 @@ public class DriverController {
     DriverService driverService;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil saveDriver(@RequestBody DriverDTO dto){
+    public ResponseUtil addDriver(@RequestBody DriverDTO dto){
         driverService.addDriver(dto);
         return new ResponseUtil("Ok", "Successfully Registered.",null);
+    }
+    @GetMapping(path = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil findDriver(@PathVariable String id){
+        return new ResponseUtil("Ok", "Successfully Searched.",driverService.findDriver(id));
     }
 }
