@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalDate;
 
 
 /**
@@ -33,5 +34,6 @@ public class Driver {
     private String dEmail;
     private String dLicenseNumber;
     private String dLicensePhoto;
+    private LocalDate dRegisteredDate;
 
 }

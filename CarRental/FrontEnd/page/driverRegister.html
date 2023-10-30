@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" href="../assets/css/bootstrap.css">
     <link rel="stylesheet" href="../css/admindashboardstyle.css">
+
 </head>
 <body>
 
@@ -130,7 +131,7 @@
 
                                 <div class="mb-3">
                                     <label for="txtDDrivingLicensePhoto" class="text-black form-label">Driving License Photo</label>
-                                    <input type="file" name="dDrivingLicensePhoto" class="form-control" id="txtDDrivingLicensePhoto">
+                                    <input type="text" name="dDrivingLicensePhoto" class="form-control" id="txtDDrivingLicensePhoto">
                                 </div>
 
 
@@ -138,6 +139,7 @@
                                 <button id="btnDriverSave" type="button" style="width: 150px" class="btn btn-success m-auto m-lg-2 justify-content-center" >Save</button>
                                 <button id="btnDriverUpdate" type="button" style="width: 150px" class="btn btn-info m-auto m-lg-2">Update</button>
                                 <button id="btnDriverDelete" type="button" style="width: 150px" class="btn btn-danger m-auto m-lg-2">Delete</button>
+                                <button id="btnGenerateDriverID" type="button" style="width: 150px" class="btn btn-danger m-auto m-lg-2">ID</button>
 
                             </form>
                         </div>
@@ -151,5 +153,6 @@
 </div>
 <script src="../assets/js/bootstrap.js"></script>
 <script src="../assets/js/jquery-3.6.1.min.js"></script>
+<script src="../controllers/DriverRegisterController.js"></script>
 </body>
 </html>

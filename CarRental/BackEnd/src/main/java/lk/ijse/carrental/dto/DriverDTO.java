@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDate;
+
 /**
  * `@authority` Chathushka Madumal
  * hp
@@ -25,4 +27,5 @@ public class DriverDTO {
     private String dEmail;
     private String dLicenseNumber;
     private String dLicensePhoto;
+    private LocalDate dRegisteredDate;
 }

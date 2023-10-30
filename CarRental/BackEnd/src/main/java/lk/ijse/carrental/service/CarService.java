@@ -3,6 +3,7 @@ package lk.ijse.carrental.service;
 import lk.ijse.carrental.dto.CarDTO;
 
 
+
 import java.util.List;
 
 /**
@@ -19,4 +20,10 @@ public interface CarService {
     List<CarDTO> getAllCar();
     CarDTO findCar(String id);
     void updateCar(CarDTO c);
+    String generateCarIds();
+    int countRegisteredCars();
+
+    CarDTO searchUserFromCar(String id);
+
+    CarDTO findCarToReserve(String vNumber);
 }
