@@ -84,7 +84,8 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public DriverDTO searchUserFromDriver(String id) {
-        return null;
+        Driver driver = driverRepo.searchDriver(id);
+        return mapper.map(driver, DriverDTO.class);
     }
 
     @Override
