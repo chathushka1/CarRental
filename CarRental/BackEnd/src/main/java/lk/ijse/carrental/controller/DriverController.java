@@ -1,8 +1,12 @@
 package lk.ijse.carrental.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import lk.ijse.carrental.dto.DriverDTO;
+import lk.ijse.carrental.service.DriverService;
+import lk.ijse.carrental.util.ResponseUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * `@authority` Chathushka Madumal
@@ -16,4 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/driver")
 @CrossOrigin
 public class DriverController {
+    @Autowired
+    DriverService driverService;
+
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil saveDriver(@RequestBody DriverDTO dto){
+        driverService.addDriver(dto);
+        return new ResponseUtil("Ok", "Successfully Registered.",null);
+    }
 }
