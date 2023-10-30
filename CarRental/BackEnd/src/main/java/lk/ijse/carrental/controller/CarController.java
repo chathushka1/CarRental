@@ -1,11 +1,11 @@
 package lk.ijse.carrental.controller;
 
-import lk.ijse.carrental.entity.Car;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lk.ijse.carrental.dto.CarDTO;
+import lk.ijse.carrental.service.CarService;
+import lk.ijse.carrental.util.ResponseUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -20,4 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/car")
 @CrossOrigin
 public class CarController {
+    @Autowired
+    CarService carService;
+
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil saveCustomer(@RequestBody CarDTO dto){
+        carService.addCar(dto);
+        return new ResponseUtil("Ok", "Successfully Registered.",null);
+    }
+
+
 }
