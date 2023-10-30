@@ -28,12 +28,23 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     ModelMapper mapper;
+
     @Override
-    public void addCustomer(CustomerDTO dto) {
-        if (!customerRepo.existsById(dto.getCId())) {
-            customerRepo.save(mapper.map(dto, Customer.class));
+    public void saveCustomer(CustomerDTO customer) {
+        if (!customerRepo.existsById(customer.getCustomerId())) {
+            customerRepo.save(mapper.map(customer, Customer.class));
         } else {
-            throw new RuntimeException(dto.getCId() + " Customer Already Exists !!!");
+            throw new RuntimeException(customer.getCustomerId() + " Customer Already Exists !!!");
+        }
+
+    }
+
+    @Override
+    public void updateCustomer(CustomerDTO customer) {
+        if (customerRepo.existsById(customer.getCustomerId())) {
+            customerRepo.save(mapper.map(customer, Customer.class));
+        } else {
+            throw new RuntimeException(customer.getCustomerId() + "No Please Check The Correct Id..!");
         }
     }
 
@@ -47,13 +58,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<CustomerDTO> getAllCustomer() {
-        List<Customer> all = customerRepo.findAll();
-        return mapper.map(all, new TypeToken<List<CustomerDTO>>() {}.getType());
-    }
-
-    @Override
-    public CustomerDTO findCustomer(String id) {
+    public CustomerDTO searchCustomer(String id) {
         if (customerRepo.existsById(id)) {
             Customer customer = customerRepo.findById(id).get();
             return mapper.map(customer, CustomerDTO.class);
@@ -63,39 +68,35 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void updateCustomer(CustomerDTO c) {
-        if (customerRepo.existsById(c.getCId())) {
-            customerRepo.save(mapper.map(c, Customer.class));
-        } else {
-            throw new RuntimeException(c.getCId() + "No Please Check The Correct Id..!");
-        }
+    public List<CustomerDTO> getAllCustomers() {
+        List<Customer> all = customerRepo.findAll();
+        return mapper.map(all, new TypeToken<List<CustomerDTO>>() {}.getType());
     }
 
     @Override
-    public int registeredCustomerCount() {
+    public String generateCustomerIds() {
+        return customerRepo.generateCId();
+    }
+
+    @Override
+    public int countRegisteredCustomers() {
         return customerRepo.registeredCusCount();
     }
 
     @Override
-    public int dailyRegisteredCustomerCount(String date) {
+    public int countDailyRegisteredCustomers(String date) {
         return customerRepo.dailyRegisteredCusCount(date);
     }
 
-
     @Override
-    public CustomerDTO searchUserCustomer(String id) {
+    public CustomerDTO searchUserFromCustomer(String id) {
         Customer customer = customerRepo.searchCustomer(id);
         return mapper.map(customer, CustomerDTO.class);
     }
 
     @Override
     public CustomerDTO findCustomerToReserve(String nic) {
-        Customer customer = customerRepo.searchCustomer(nic);
+        Customer customer = customerRepo.findCustomerToReserve(nic);
         return mapper.map(customer, CustomerDTO.class);
-    }
-
-    @Override
-    public String cusIdGenerate() {
-        return customerRepo.generateCId();
     }
 }

@@ -58,66 +58,69 @@
                     <div class="row">
                         <div class="col" style="background-image: radial-gradient(circle at top,white,deepskyblue)">
                             <h2 class="text-danger text-center m-lg-100 pt-3  text-primary" >Customer</h2>
-                            <form class="row p-4 m-0 m-lg-2  justify-content-center" id="customerForm">
+                            <form class="row p-4 m-0 m-lg-2  justify-content-center" >
                                 <div class="col-md-6 mb3">
                                     <!--col-md-6 mb3-->
                                     <label for="txtCustomerID" class="text-black form-label" id="cId">Customer Id</label>
-                                    <input type="text" name="cusId" class="form-control" id="txtCustomerID" aria-describedby="emailHelp">
+                                    <input type="text"  class="form-control" id="txtCustomerID" aria-describedby="emailHelp">
                                 </div>
                                 <div class="col-md-6 mb3">
                                     <label for="txtCustomerName" class="text-black form-label">Customer Name</label>
-                                    <input type="text" name="cusName" class="form-control" id="txtCustomerName">
+                                    <input type="text" class="form-control" id="txtCustomerName">
                                 </div>
                                 <div class="col-md-6 mb3">
                                     <label for="txtCustomerAddress" class="text-black form-label">Customer Address</label>
-                                    <input type="text" name="cusAddress" class="form-control" id="txtCustomerAddress">
+                                    <input type="text" class="form-control" id="txtCustomerAddress">
                                 </div>
                                 <div class="col-md-6 mb3">
-                                    <label for="txtEmail" class="text-black form-label">Email</label>
-                                    <input type="text" name="cusEmail" class="form-control" id="txtEmail">
-                                </div>
-
-                                <div class="col-md-6 mb3">
-                                    <label for="txtContact" class="text-black form-label">Contact Number</label>
-                                    <input type="text" name="cusContact" class="form-control" id="txtContact">
+                                    <label for="txtCusEmail" class="text-black form-label">Email</label>
+                                    <input type="text"  class="form-control" id="txtCusEmail">
                                 </div>
 
                                 <div class="col-md-6 mb3">
-                                    <label for="txtNic" class="text-black form-label">NIC</label>
-                                    <input type="text" name="cusNic" class="form-control" id="txtNic">
+                                    <label for="txtCusContact" class="text-black form-label">Contact Number</label>
+                                    <input type="text"  class="form-control" id="txtCusContact">
+                                </div>
+
+                                <div class="col-md-6 mb3">
+                                    <label for="txtCusNic" class="text-black form-label">NIC</label>
+                                    <input type="text"  class="form-control" id="txtCusNic">
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                    <label for="txtDrivingLicen" class="text-black form-label">Driving Licen</label>
-                                    <input type="text" name="cusDrivingLicen" class="form-control" id="txtDrivingLicen">
+                                    <label for="txtCusDrivingLicense" class="text-black form-label">Driving License</label>
+                                    <input type="text"  class="form-control" id="txtCusDrivingLicense">
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                    <label for="txtNicPhoto" class="text-black form-label">NIC Photo</label>
-                                    <input type="text" name="cusNicPhoto" class="form-control" id="txtNicPhoto">
+                                    <label for="txtCusNicPhoto" class="text-black form-label">NIC Photo</label>
+                                    <input type="text"  class="form-control" id="txtCusNicPhoto">
                                 </div>
 
 
                                 <div class="col-md-6 mb-3">
-                                    <label for="txtDrivingLicenPhoto" class="text-black form-label">Driving Licen Photo Photo</label>
-                                    <input type="text" name="drivingLicenPhoto" class="form-control" id="txtDrivingLicenPhoto">
+                                    <label for="txtCusDrivingLicensePhoto" class="text-black form-label">Driving License Photo</label>
+                                    <input type="text"  class="form-control" id="txtCusDrivingLicensePhoto">
                                 </div>
 
+
+
+                                <div class="col-md-6 mb3">
+                                    <label for="txtCustomerUserName" class="text-black form-label">User Name</label>
+                                    <input type="text"  class="form-control" id="txtCustomerUserName">
+                                </div>
+                                <div class="col-md-6 mb3">
+                                    <label for="txtCustomerPassword" class="text-black form-label">Password</label>
+                                    <input type="text"  class="form-control" id="txtCustomerPassword">
+                                </div>
                                 <label class="form-label text-danger visually-hidden" id="generateCusId"></label>
 
                                 <label class="form-label text-danger visually-hidden" id="generateUserId"></label>
 
-                                <div class="col-md-6 mb3">
-                                    <label for="txtCustomerUserName" class="text-black form-label">User Name</label>
-                                    <input type="text" name="customerUserName" class="form-control" id="txtCustomerUserName">
-                                </div>
-                                <div class="col-md-6 mb3">
-                                    <label for="txtCustomerPassword" class="text-black form-label">Password</label>
-                                    <input type="text" name="cusPassword" class="form-control" id="txtCustomerPassword">
-                                </div>
                                 <div class="col-6 mt-4 mb-3 gap-2 justify-content-center">
                                 <button id="btnCusSave" type="button" style="width: 150px" class="btn btn-success m-auto m-lg-2 justify-content-center" >Save</button>
                                 <button id="btnCusCancel" type="button" style="width: 150px" class="btn btn-danger m-auto m-lg-2">Cancel</button>
+                                <button id="btnGenerateID" type="button" style="width: 150px" class="btn btn-danger m-auto m-lg-2">ID</button>
 <!--
                                 <button id="btnCusDelete" type="button" style="width: 150px" class="btn btn-danger m-auto m-lg-2">Delete</button>
 -->
@@ -165,8 +168,9 @@
     </div>
 
 </div>
-<script src="../controllers/CustomerRegisterController.js"></script>
+
 <script src="../assets/js/bootstrap.js"></script>
 <script src="../assets/js/jquery-3.6.1.min.js"></script>
+<script src="../controllers/CustomerRegisterController.js"></script>
 </body>
 </html>

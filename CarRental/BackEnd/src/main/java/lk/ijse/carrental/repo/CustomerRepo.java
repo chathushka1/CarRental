@@ -14,7 +14,7 @@ import org.springframework.data.repository.query.Param;
  */
 public interface CustomerRepo extends JpaRepository<Customer,String>{
 
-    @Query(value = "SELECT cId FROM Customer ORDER BY cId Desc LIMIT 1",nativeQuery = true)
+    @Query(value = "SELECT customerId FROM Customer ORDER BY customerId Desc LIMIT 1",nativeQuery = true)
     String generateCId();
 
     @Query(value = "SELECT COUNT(*) FROM Customer",nativeQuery = true)
@@ -27,5 +27,5 @@ public interface CustomerRepo extends JpaRepository<Customer,String>{
     Customer searchCustomer(@Param("id")String id);
 
     @Query(value = "SELECT * FROM Customer WHERE nic=:nic",nativeQuery = true)
-    Customer findCustomerToReserve();
+    Customer findCustomerToReserve(@Param("nic")String nic);
 }

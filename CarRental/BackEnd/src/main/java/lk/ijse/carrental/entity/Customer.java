@@ -26,20 +26,19 @@ import java.util.Date;
 @ToString
 public class Customer {
    @Id
-    private String cId;
-    private String name;
-    private String address;
-    private String eMail;
-    private String contact;
-    private String nic;
-    private String licenseNumber;
-    private String nicPhoto;
-    private String licensePhoto;
-    private LocalDate date;
+    private String customerId;
+    private String customerName;
+    private LocalDate registeredDate;
+    private String customerEmail;
+    private String customerNIC;
+    private String customerAddress;
+    private String customerContact;
+    private String customerDrivingLicenseId;
+    private String customerDrivingLicenseImage;
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    private User user;
+    private User users;
 
 
 }

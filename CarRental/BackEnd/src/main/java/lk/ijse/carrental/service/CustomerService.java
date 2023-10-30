@@ -12,14 +12,23 @@ import java.util.List;
  * FrontEnd
  */
 public interface CustomerService {
-    void addCustomer(CustomerDTO dto);
+    void saveCustomer(CustomerDTO customer);
+
+    void updateCustomer(CustomerDTO customer);
+
     void deleteCustomer(String id);
-    List<CustomerDTO> getAllCustomer();
-    CustomerDTO findCustomer(String id);
-    void updateCustomer(CustomerDTO c);
-    int registeredCustomerCount();
-    int dailyRegisteredCustomerCount(String date);
-    CustomerDTO searchUserCustomer(String id);
+
+    CustomerDTO searchCustomer(String id);
+
+    List<CustomerDTO> getAllCustomers();
+
+    String generateCustomerIds();
+
+    int countRegisteredCustomers();
+
+    int countDailyRegisteredCustomers(String date);
+
+    CustomerDTO searchUserFromCustomer(String id);
+
     CustomerDTO findCustomerToReserve(String nic);
-    String cusIdGenerate();
 }

@@ -1,14 +1,18 @@
-const BASE_URL = "http://localhost:8080/BackEnd_war/";
+let BASE_URL = "http://localhost:8080/BackEnd_war/";
 
 //add customer event
-$("#btnCusSave").click(function () {
-    /*if (checkAll()) {
-        saveCustomer();
-    } else {
-        alert("Error");
-    }*/
+$("#btnCusSave").click(function (){
+    alert("Saved");
+    register();
 
-    saveCustomer();
+   /* swal({
+        title: "Confirmation!",
+        text: "Driver Updated Successfully",
+        icon: "success",
+        button: "Close",
+        timer: 2000
+    });*/
+
 });
 /*function saveCustomer() {
     let customerID = $("#txtCustomerID").val();
@@ -43,25 +47,26 @@ var now = new Date();
 var day = ("0" + now.getDate()).slice(-2);
 var month = ("0" + (now.getMonth() + 1)).slice(-2);
 var today = now.getFullYear() + "-" + (month) + "-" + (day);
+/*
 
 function saveCustomer(){
     var user={
         userId:$("#generateUserId").text(),
-        username:$("#registerUsername").val(),
-        password:$("#registerPassword").val(),
+        username:$("#txtCustomerUserName").val(),
+        password:$("#txtCustomerPassword").val()
     }
     var cusDetails= {
-        cId: $("#txtCustomerID").val(),
+        cId: $("#generateCusId").text(),
         users:user,
-        registeredDate:today.toString(),
+        date:today.toString(),
         name :$("#txtCustomerName").val(),
         address :$("#txtCustomerAddress").val(),
-        eMail: $("#txtEmail").val(),
-        contact: $("#txtContact").val(),
-        nic:$("#txtNic").val(),
-        licenseNumber: $("#txtDrivingLicense").val(),
-        nicPhoto: $("#txtNicPhoto").val(),
-        licensePhoto: $("#txtDrivingLicenPhoto").val()
+        eMail: $("#txtCusEmail").val(),
+        contact: $("#txtCusContact").val(),
+        nic:$("#txtCusNic").val(),
+        licenseNumber: $("#txtCusDrivingLicense").val(),
+        nicPhoto: $("#txtCusNicPhoto").val(),
+        licensePhoto: $("#txtCusDrivingLicenPhoto").val()
     }
 
     $.ajax({
@@ -73,8 +78,10 @@ function saveCustomer(){
             if (resp.message==200){
                 registerUser(user);
                 generateRegisterIds();
+                generateUserIds();
+                alert(resp.message);
+
             }
-            alert("Saved");
 
         },
         error:function (error) {
@@ -84,7 +91,48 @@ function saveCustomer(){
     });
 
 }
+*/
 
+function register(){
+    var user={
+        userId:$("#generateUserId").text(),
+        username:$("#txtCustomerUserName").val(),
+        password:$("#txtCustomerPassword").val(),
+    }
+
+    var cusDetails={
+        customerId:$("#generateCusId").text(),
+        users:user,
+        registeredDate:today.toString(),
+        customerName:$("#txtCustomerName").val(),
+        customerEmail:$("#txtCusEmail").val(),
+        customerNIC:$("#txtCusNic").val(),
+        customerAddress:$("#txtCustomerAddress").val(),
+        customerContact:$("#txtCusContact").val(),
+        customerDrivingLicenseId:$("#txtCusDrivingLicense").val(),
+        customerDrivingLicenseImage:$("#txtCusDrivingLicensePhoto").val()
+    }
+
+    $.ajax({
+        url:BASE_URL+"customer",
+        method:"POST",
+        contentType:"application/json",
+        data: JSON.stringify(cusDetails),
+        success:function (resp) {
+            if (resp.message==200){
+                registerUser(user);
+                generateUserIds();
+                generateRegisterIds();
+            }
+
+
+        },
+        error:function (error) {
+            console.log(error);
+        }
+    });
+
+}
 
 function registerUser(users){
     var user={
@@ -102,7 +150,6 @@ function registerUser(users){
             /*  alert(resp.message);*/
             console.log(resp);
             if (resp.message==200){
-
             }
 
         },
@@ -112,13 +159,16 @@ function registerUser(users){
     });
 }
 
+
+
+
+/*
 $("#btnCusUpdate").click(function () {
     let id = $("#txtCustomerID").val();
-    updateCustomer(id);
-
 });
+*/
 
-function searchCustomer(id) {
+/*function searchCustomer(id) {
     let resp = false;
     $.ajax({
         url: BASE_URL + 'customer',
@@ -142,9 +192,9 @@ function searchCustomer(id) {
         }
     });
     return resp;
-}
+}*/
 
-function getAllCustomers() {
+/*function getAllCustomers() {
     $.ajax({
         url: BASE_URL + 'customer',
         dataType: "json",
@@ -177,10 +227,10 @@ function getAllCustomers() {
             alert(error.responseJSON.message);
         }
     });
-}
+}*/
 
 
-function updateCustomer(id) {
+/*function updateCustomer(id) {
     if (searchCustomer(id) == undefined) {
         alert("No such Customer..please check the ID");
     } else {
@@ -231,10 +281,10 @@ function updateCustomer(id) {
         }
     }
 
-}
+}*/
 
 function generateRegisterIds() {
-    $("#txtCustomerID").text("C00-0001");
+    $("#generateCusId").text("C00-0001");
     var test = "id";
 
     $.ajax({
@@ -261,3 +311,40 @@ function generateRegisterIds() {
         }
     });
 }
+
+function generateUserIds() {
+    $("#generateUserId").text("U00-0001");
+    var test = "id";
+
+    $.ajax({
+        url: BASE_URL+"user?test="+test,
+        method: "GET",
+        success: function (response) {
+            var userId = response.data;
+            var tempId = parseInt(userId.split("-")[1]);
+            tempId = tempId + 1;
+            if (tempId <= 9) {
+                $("#generateUserId").text("U00-000" + tempId);
+            } else if (tempId <= 99) {
+                $("#generateUserId").text("U00-00" + tempId);
+            } else if (tempId <= 999) {
+                $("#generateUserId").text("U00-0" + tempId);
+            } else {
+                $("#generateUserId").text("U00-" + tempId);
+            }
+
+        },
+        error: function (ob, statusText, error) {
+
+        }
+    });
+}
+
+
+
+$("#btnGenerateID").click(function () {
+    generateRegisterIds();
+    generateUserIds();
+});
+
+
