@@ -44,4 +44,9 @@ public class CarController {
         carService.deleteCar(id);
         return new ResponseUtil("Ok", "Successfully Deleted.",null);
     }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil getAllCar(){
+        return new ResponseUtil("Ok", "Successfully Searched.",carService.getAllCar());
+    }
 }
