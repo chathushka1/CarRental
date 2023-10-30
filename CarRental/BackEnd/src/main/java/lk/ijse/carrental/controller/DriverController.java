@@ -38,4 +38,9 @@ public class DriverController {
         driverService.updateDriver(dto);
         return new ResponseUtil("Ok", "Successfully Updated.",null);
     }
+    @DeleteMapping(params = {"id"},produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil deleteDriver(@RequestParam String id){
+        driverService.deleteDriver(id);
+        return new ResponseUtil("Ok", "Successfully Deleted.",null);
+    }
 }
