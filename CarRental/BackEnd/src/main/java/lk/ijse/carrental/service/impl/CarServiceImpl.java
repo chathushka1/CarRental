@@ -5,10 +5,12 @@ import lk.ijse.carrental.entity.Car;
 import lk.ijse.carrental.repo.CarRepo;
 import lk.ijse.carrental.service.CarService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.smartcardio.Card;
 import java.util.List;
 
 /**
@@ -39,32 +41,46 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void deleteCar(String id) {
-
+        if (carRepo.existsById(id)) {
+            carRepo.deleteById(id);
+        } else {
+            throw new RuntimeException(id + "No Please Check The Correct Id..!");
+        }
     }
 
     @Override
     public List<CarDTO> getAllCar() {
-        return null;
+        List<Car> all = carRepo.findAll();
+        return mapper.map(all, new TypeToken<List<CarDTO>>() {}.getType());
     }
 
     @Override
     public CarDTO findCar(String id) {
-        return null;
+        if (carRepo.existsById(id)) {
+            Car car = carRepo.findById(id).get();
+            return mapper.map(car, CarDTO.class);
+        } else {
+            throw new RuntimeException(id + "No Please Check The Correct Id..!");
+        }
     }
 
     @Override
     public void updateCar(CarDTO c) {
-
+        if (carRepo.existsById(c.getVId())) {
+            carRepo.save(mapper.map(c, Car.class));
+        } else {
+            throw new RuntimeException(c.getVId() + "No Please Check The Correct Id..!");
+        }
     }
 
     @Override
     public String generateCarIds() {
-        return null;
+        return carRepo.generateVId();
     }
 
     @Override
     public int countRegisteredCars() {
-        return 0;
+        return carRepo.registeredVehicleCount();
     }
 
     @Override
