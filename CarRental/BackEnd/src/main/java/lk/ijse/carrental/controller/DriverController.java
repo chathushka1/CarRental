@@ -59,5 +59,13 @@ public class DriverController {
         return new ResponseUtil("Ok", "Successfully Searched.",driverService.countRegisteredDrivers());
     }
 
+    @GetMapping(path = "USER/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil searchUserFromDriver(@PathVariable("id") String id){
+        return new ResponseUtil("Ok", "Successfully Searched.",driverService.findDriver(id));
+    }
 
+    @GetMapping(path = "/findValidNic/{nic}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil findDriverToReserve(@PathVariable("nic") String nic){
+        return new ResponseUtil("Ok", "Successfully Searched.",driverService.findDriverToReserve(nic));
+    }
 }
