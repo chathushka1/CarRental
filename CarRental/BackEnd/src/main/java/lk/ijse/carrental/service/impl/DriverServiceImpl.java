@@ -41,4 +41,24 @@ public class DriverServiceImpl implements DriverService {
     public void updateDriver(DriverDTO c) {
 
     }
+
+    @Override
+    public String generateDriverIds() {
+        return null;
+    }
+
+    @Override
+    public int countRegisteredDrivers() {
+        return 0;
+    }
+
+    @Override
+    public DriverDTO searchUserFromDriver(String id) {
+        return null;
+    }
+
+    @Override
+    public DriverDTO findDriverToReserve(String nic) {
+        return null;
+    }
 }

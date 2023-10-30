@@ -49,4 +49,8 @@ public class DriverController {
     public ResponseUtil getAllDriver(){
         return new ResponseUtil("Ok", "Successfully Searched.",driverService.getAllDriver());
     }
+    @GetMapping(params = {"test"})
+    public ResponseUtil generateCustomerIds(@RequestParam String test) {
+        return new ResponseUtil("Ok", "Successfully Searched.",driverService.generateDriverIds());
+    }
 }

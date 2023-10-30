@@ -1,5 +1,6 @@
 package lk.ijse.carrental.service;
 
+
 import lk.ijse.carrental.dto.DriverDTO;
 
 import java.util.List;
@@ -17,4 +18,11 @@ public interface DriverService {
     List<DriverDTO> getAllDriver();
     DriverDTO findDriver(String id);
     void updateDriver(DriverDTO c);
+    String generateDriverIds();
+
+    int countRegisteredDrivers();
+
+    DriverDTO searchUserFromDriver(String id);
+
+    DriverDTO findDriverToReserve(String nic);
 }
