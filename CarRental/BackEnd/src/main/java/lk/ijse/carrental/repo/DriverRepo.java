@@ -2,6 +2,7 @@ package lk.ijse.carrental.repo;
 
 
 import lk.ijse.carrental.entity.Driver;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -12,7 +13,7 @@ import org.springframework.data.repository.query.Param;
  * 2023-10-29
  * FrontEnd
  */
-public interface DriverRepo {
+public interface DriverRepo extends JpaRepository<Driver,String> {
 
     @Query(value = "SELECT dId FROM Driver ORDER BY dId Desc LIMIT 1",nativeQuery = true)
     String generateDId();
