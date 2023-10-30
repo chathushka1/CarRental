@@ -32,4 +32,10 @@ public class DriverController {
     public ResponseUtil findDriver(@PathVariable String id){
         return new ResponseUtil("Ok", "Successfully Searched.",driverService.findDriver(id));
     }
+
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil updateDriver(@RequestBody DriverDTO dto){
+        driverService.updateDriver(dto);
+        return new ResponseUtil("Ok", "Successfully Updated.",null);
+    }
 }
