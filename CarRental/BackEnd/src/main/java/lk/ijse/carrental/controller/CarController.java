@@ -34,4 +34,9 @@ public class CarController {
         return new ResponseUtil("Ok", "Successfully Searched.",carService.findCar(id));
     }
 
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil updateCar(@RequestBody CarDTO dto){
+        carService.updateCar(dto);
+        return new ResponseUtil("Ok", "Successfully Updated.",null);
+    }
 }
