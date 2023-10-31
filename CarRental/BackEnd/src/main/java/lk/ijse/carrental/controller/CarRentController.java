@@ -35,18 +35,23 @@ public class CarRentController {
     public ResponseUtil addCarRent(@RequestBody CarRentDTO dto) {
         System.out.println(dto.toString());
         service.addCarRent(dto);
-        return new ResponseUtil("Ok", "Saved", null);
+        return new ResponseUtil("Ok", "Successfully Saved", null);
     }
 
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseUtil updateCarRent(@RequestBody CarRentDTO dto) {
         service.updateCarRent(dto);
-        return new ResponseUtil("OK", "Updated", null);
+        return new ResponseUtil("OK", "Successfully Updated", null);
     }
 
     @DeleteMapping(params = {"rentId"}, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseUtil deleteCarRent(@RequestParam String rentId) {
         service.deleteCarRent(rentId);
-        return new ResponseUtil("OK", "Deleted", null);
+        return new ResponseUtil("OK", "Successfully Deleted", null);
+    }
+
+    @GetMapping(path = "/{rentId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil searchCarRent(@PathVariable String rentId) {
+        return new ResponseUtil("OK", "Successfully Searched", service.searchCarRent(rentId));
     }
 }
