@@ -49,6 +49,6 @@ public class Car {
     private String sideViewImage;
     private String interiorViewImage;
 
-    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "carRent", cascade = CascadeType.ALL)
     private List<CarRent> rentals = new ArrayList<>();
 }

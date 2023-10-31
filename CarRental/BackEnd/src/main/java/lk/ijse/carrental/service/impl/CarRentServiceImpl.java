@@ -18,11 +18,6 @@ import java.util.List;
  */
 public class CarRentServiceImpl implements CarRentService {
 
-    @Autowired
-    CarRepo repo;
-
-    @Autowired
-    ModelMapper mapper;
 
     @Override
     public void addCarRent(CarRentDTO dto) {

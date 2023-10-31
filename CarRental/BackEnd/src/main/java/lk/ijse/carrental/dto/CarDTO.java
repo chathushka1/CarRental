@@ -38,4 +38,5 @@ public class CarDTO {
     private String backViewImage;
     private String sideViewImage;
     private String interiorViewImage;
+
 }
