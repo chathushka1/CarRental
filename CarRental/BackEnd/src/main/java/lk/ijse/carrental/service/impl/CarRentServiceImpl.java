@@ -94,7 +94,11 @@ public class CarRentServiceImpl implements CarRentService {
 
     @Override
     public void updateCarRentStatus(String rentId, String status) {
-
+        if (repo.existsById(rentId)) {
+            repo.updateCarRentStatus(rentId, status);
+        } else {
+            throw new RuntimeException("No Such CarRent To Update");
+        }
     }
 
     @Override
