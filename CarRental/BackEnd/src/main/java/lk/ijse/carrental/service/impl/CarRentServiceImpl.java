@@ -120,11 +120,13 @@ public class CarRentServiceImpl implements CarRentService {
 
     @Override
     public List<CarRentDTO> getTodayBookings(String today) {
-        return null;
+        return mapper.map(repo.getTodayBookings(today), new TypeToken<List<CarRentDTO>>() {
+        }.getType());
     }
 
     @Override
     public List<CarRentDTO> getCarRentsByCustomerId(String customerId) {
-        return null;
+        return mapper.map(repo.getAllByCustomerId(customerId), new TypeToken<List<CarRentDTO>>() {
+        }.getType());
     }
 }
