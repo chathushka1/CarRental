@@ -36,6 +36,10 @@ public class CarRent {
     private Customer customer;
 
     @ManyToOne
+    @JoinColumn(name = "registrationNo", referencedColumnName = "registrationNo", nullable = false)
+    private Car car;
+
+    @ManyToOne
     @JoinColumn(name = "dLicenseNumber", referencedColumnName = "dLicenseNumber")
     private Driver driver;
 }
