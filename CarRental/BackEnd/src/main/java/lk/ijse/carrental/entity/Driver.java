@@ -5,9 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -35,5 +36,9 @@ public class Driver {
     private String dLicenseNumber;
     private String dLicensePhoto;
     private LocalDate dRegisteredDate;
+
+    @OneToMany(mappedBy = "driver",cascade = CascadeType.ALL)
+    private List<CarRent> rentals = new ArrayList<>();
+
 
 }
