@@ -86,7 +86,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public String searchRegNumberIsExists(String reg) {
-        return null;
+        return carRepo.searchRegNumberIsExists(reg);
+
     }
 
     @Override
