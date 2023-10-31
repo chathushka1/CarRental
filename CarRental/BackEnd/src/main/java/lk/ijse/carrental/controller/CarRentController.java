@@ -1,9 +1,11 @@
 package lk.ijse.carrental.controller;
 
+import lk.ijse.carrental.dto.CarRentDTO;
 import lk.ijse.carrental.dto.CustomerDTO;
 import lk.ijse.carrental.service.CarRentService;
 import lk.ijse.carrental.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,12 +30,13 @@ public class CarRentController {
         return new ResponseUtil("Ok", "Successfully Searched.", service.getAllCarRents());
     }
 
-      /*return new ResponseUtil("Ok", "Successfully Searched.",customerService.getAllCustomers());*/
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil addCarRent(@RequestBody CarRentDTO dto) {
+        System.out.println(dto.toString());
+        service.addCarRent(dto);
+        return new ResponseUtil("Ok", "Saved", null);
+    }
 
-    /*@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil saveCustomer(@RequestBody CustomerDTO dto){
-        customerService.saveCustomer(dto);
-        return new ResponseUtil("Ok", "Successfully Registered.",null);
-    }*/
 
 }
