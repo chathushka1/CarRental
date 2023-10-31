@@ -2,6 +2,7 @@ package lk.ijse.carrental.service.impl;
 
 import lk.ijse.carrental.dto.CarRentDTO;
 import lk.ijse.carrental.entity.CarRent;
+import lk.ijse.carrental.repo.CarRentRepo;
 import lk.ijse.carrental.repo.CarRepo;
 import lk.ijse.carrental.service.CarRentService;
 import org.modelmapper.ModelMapper;
@@ -18,10 +19,20 @@ import java.util.List;
  */
 public class CarRentServiceImpl implements CarRentService {
 
+    @Autowired
+    CarRentRepo repo;
+
+    @Autowired
+    ModelMapper mapper;
 
     @Override
     public void addCarRent(CarRentDTO dto) {
-
+        if (!repo.existsById(dto.getRentId())) {
+            repo.save(mapper.map(dto,CarRent.class));
+            //customerRepo.save(mapper.map(customer, Customer.class));
+        } else {
+            throw new RuntimeException("Booking Already Exists...");
+        }
     }
 
     @Override
