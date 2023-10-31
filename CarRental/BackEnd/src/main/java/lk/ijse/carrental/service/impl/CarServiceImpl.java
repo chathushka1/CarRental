@@ -147,7 +147,9 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<CarDTO> findByBrand(String brand) {
-        return null;
+        List<Car>all=carRepo.findByBrand(brand);
+        return mapper.map(all,new TypeToken<List<CarDTO>>(){}.getType());
+
     }
 
     @Override
