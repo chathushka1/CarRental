@@ -6,6 +6,7 @@ import lk.ijse.carrental.repo.CarRentRepo;
 import lk.ijse.carrental.repo.CarRepo;
 import lk.ijse.carrental.service.CarRentService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -64,7 +65,8 @@ public class CarRentServiceImpl implements CarRentService {
 
     @Override
     public List<CarRentDTO> getAllCarRents() {
-        return null;
+        return mapper.map(repo.findAll(), new TypeToken<List<CarRentDTO>>() {
+        }.getType());
     }
 
     @Override
