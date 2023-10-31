@@ -5,8 +5,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * `@authority` Chathushka Madumal
@@ -44,4 +48,7 @@ public class Car {
     private String backViewImage;
     private String sideViewImage;
     private String interiorViewImage;
+
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+    private List<CarRent> rentals = new ArrayList<>();
 }
