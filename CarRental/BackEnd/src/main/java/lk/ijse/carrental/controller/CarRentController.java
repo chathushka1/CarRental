@@ -54,4 +54,10 @@ public class CarRentController {
     public ResponseUtil searchCarRent(@PathVariable String rentId) {
         return new ResponseUtil("OK", "Successfully Searched", service.searchCarRent(rentId));
     }
+
+    @PutMapping(path = "/{rentId}/{status}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil updateCarRentStatus(@PathVariable String rentId, @PathVariable String status) {
+        service.updateCarRentStatus(rentId, status);
+        return new ResponseUtil("Ok", "update car status",null);
+    }
 }
