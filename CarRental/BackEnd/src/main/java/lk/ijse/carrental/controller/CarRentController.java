@@ -43,4 +43,10 @@ public class CarRentController {
         service.updateCarRent(dto);
         return new ResponseUtil("OK", "Updated", null);
     }
+
+    @DeleteMapping(params = {"rentId"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil deleteCarRent(@RequestParam String rentId) {
+        service.deleteCarRent(rentId);
+        return new ResponseUtil("OK", "Deleted", null);
+    }
 }
