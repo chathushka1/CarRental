@@ -55,7 +55,11 @@ public class CarRentServiceImpl implements CarRentService {
 
     @Override
     public CarRentDTO searchCarRent(String rentId) {
-        return null;
+        if (repo.existsById(rentId)) {
+            return mapper.map(repo.findById(rentId).get(), CarRentDTO.class);
+        } else {
+            throw new RuntimeException("Car Rent Not Found...");
+        }
     }
 
     @Override
