@@ -92,6 +92,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void carAvailableOrNot(String available, String id) {
+        carRepo.carAvailableOrNot(available,id);
 
     }
 
