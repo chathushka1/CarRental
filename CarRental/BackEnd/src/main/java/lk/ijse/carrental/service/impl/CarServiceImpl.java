@@ -73,7 +73,9 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<CarDTO> getAllCars() {
-        return null;
+        List<Car> carList = carRepo.findAll();
+        return mapper.map(carList,new TypeToken<List<CarDTO>>(){}.getType());
+
     }
 
     @Override
