@@ -168,7 +168,9 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<CarDTO> findByColour(String colour) {
-        return null;
+        List<Car>all=carRepo.findByColour(colour);
+        return mapper.map(all,new TypeToken<List<CarDTO>>(){}.getType());
+
     }
 
     @Override
