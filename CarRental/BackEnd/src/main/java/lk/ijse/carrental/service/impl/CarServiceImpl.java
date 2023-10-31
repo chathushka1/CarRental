@@ -181,6 +181,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public int needMaintenanceOrUnderMaintenanceCars(String maintain) {
-        return 0;
-    }
+            return carRepo.needMaintenanceOrUnderMaintenanceCars(maintain);
+
+        }
 }
