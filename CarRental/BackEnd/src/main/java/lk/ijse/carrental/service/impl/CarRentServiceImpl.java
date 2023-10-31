@@ -46,7 +46,11 @@ public class CarRentServiceImpl implements CarRentService {
 
     @Override
     public void deleteCarRent(String rentId) {
-
+        if (repo.existsById(rentId)) {
+            repo.deleteById(rentId);
+        } else {
+            throw new RuntimeException("No Such CarRents To Delete");
+        }
     }
 
     @Override
