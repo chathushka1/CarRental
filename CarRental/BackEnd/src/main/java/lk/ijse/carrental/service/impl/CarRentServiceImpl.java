@@ -37,7 +37,11 @@ public class CarRentServiceImpl implements CarRentService {
 
     @Override
     public void updateCarRent(CarRentDTO dto) {
-
+        if (repo.existsById(dto.getRentId())) {
+            repo.save(mapper.map(dto, CarRent.class));
+        } else {
+            throw new RuntimeException("No Such CarRents To Update");
+        }
     }
 
     @Override
