@@ -31,65 +31,107 @@ public class CarServiceImpl implements CarService {
     ModelMapper mapper;
 
     @Override
-    public void addCar(CarDTO dto) {
-        if (!carRepo.existsById(dto.getCarId())) {
-            carRepo.save(mapper.map(dto, Car.class));
-        } else {
-            throw new RuntimeException(dto.getCarId() + " Car Already Exists !!!");
-        }
+    public void saveCar(CarDTO dto) {
+
+    }
+
+    @Override
+    public void updateCar(CarDTO dto) {
+
     }
 
     @Override
     public void deleteCar(String id) {
-        if (carRepo.existsById(id)) {
-            carRepo.deleteById(id);
-        } else {
-            throw new RuntimeException(id + "No Please Check The Correct Id..!");
-        }
+
     }
 
     @Override
-    public List<CarDTO> getAllCar() {
-        List<Car> all = carRepo.findAll();
-        return mapper.map(all, new TypeToken<List<CarDTO>>() {}.getType());
+    public CarDTO searchCar(String id) {
+        return null;
     }
 
     @Override
-    public CarDTO findCar(String id) {
-        if (carRepo.existsById(id)) {
-            Car car = carRepo.findById(id).get();
-            return mapper.map(car, CarDTO.class);
-        } else {
-            throw new RuntimeException(id + "No Please Check The Correct Id..!");
-        }
-    }
-
-    @Override
-    public void updateCar(CarDTO c) {
-        if (carRepo.existsById(c.getCarId())) {
-            carRepo.save(mapper.map(c, Car.class));
-        } else {
-            throw new RuntimeException(c.getCarId() + "No Please Check The Correct Id..!");
-        }
+    public List<CarDTO> getAllCars() {
+        return null;
     }
 
     @Override
     public String generateCarIds() {
-        return carRepo.generateCarId();
-    }
-
-    @Override
-    public int countRegisteredCars() {
-        return carRepo.searchRegNumberIsExists();
-    }
-
-    @Override
-    public CarDTO searchUserFromCar(String id) {
         return null;
     }
 
     @Override
-    public CarDTO findCarToReserve(String vNumber) {
+    public String searchRegNumberIsExists(String reg) {
         return null;
+    }
+
+    @Override
+    public void carAvailableOrNot(String available, String id) {
+
+    }
+
+    @Override
+    public List<CarDTO> sortAccordingToPassengersByAscending() {
+        return null;
+    }
+
+    @Override
+    public List<CarDTO> sortAccordingToPassengersByDescending() {
+        return null;
+    }
+
+    @Override
+    public List<CarDTO> sortAccordingToDailyRatePriceByDescending() {
+        return null;
+    }
+
+    @Override
+    public List<CarDTO> sortAccordingToDailyRatePriceByAscending() {
+        return null;
+    }
+
+    @Override
+    public List<CarDTO> sortAccordingToMonthlyRatePriceByAscending() {
+        return null;
+    }
+
+    @Override
+    public List<CarDTO> sortAccordingToMonthlyRatePriceByDescending() {
+        return null;
+    }
+
+    @Override
+    public List<CarDTO> findByTransmissionType(String type) {
+        return null;
+    }
+
+    @Override
+    public List<CarDTO> findByBrand(String brand) {
+        return null;
+    }
+
+    @Override
+    public List<CarDTO> findByType(String type) {
+        return null;
+    }
+
+    @Override
+    public List<CarDTO> findByFuelType(String fuelType) {
+        return null;
+    }
+
+    @Override
+    public List<CarDTO> findByColour(String colour) {
+        return null;
+    }
+
+    @Override
+    public int noOfAvailableOrReservedCars(String availability) {
+        return 0;
+    }
+
+    @Override
+    public int needMaintenanceOrUnderMaintenanceCars(String maintain) {
+        return 0;
     }
 }
