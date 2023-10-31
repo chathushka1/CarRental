@@ -3,11 +3,12 @@ package lk.ijse.carrental.service.impl;
 import lk.ijse.carrental.dto.CarRentDTO;
 import lk.ijse.carrental.entity.CarRent;
 import lk.ijse.carrental.repo.CarRentRepo;
-import lk.ijse.carrental.repo.CarRepo;
 import lk.ijse.carrental.service.CarRentService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,8 @@ import java.util.List;
  * 2023-10-31
  * FrontEnd
  */
+@Service
+@Transactional
 public class CarRentServiceImpl implements CarRentService {
 
     @Autowired
