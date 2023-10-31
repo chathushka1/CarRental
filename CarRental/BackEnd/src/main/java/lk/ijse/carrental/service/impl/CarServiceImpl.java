@@ -140,7 +140,9 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<CarDTO> findByTransmissionType(String type) {
-        return null;
+        List<Car>all=carRepo.findByTransmissionType(type);
+        return mapper.map(all,new TypeToken<List<CarDTO>>(){}.getType());
+
     }
 
     @Override
