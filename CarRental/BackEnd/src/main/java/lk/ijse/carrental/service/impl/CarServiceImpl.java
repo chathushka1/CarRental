@@ -161,7 +161,9 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public List<CarDTO> findByFuelType(String fuelType) {
-        return null;
+        List<Car>all=carRepo.findByFuelType(fuelType);
+        return mapper.map(all,new TypeToken<List<CarDTO>>(){}.getType());
+
     }
 
     @Override
