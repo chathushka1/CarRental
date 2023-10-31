@@ -38,5 +38,9 @@ public class CarRentController {
         return new ResponseUtil("Ok", "Saved", null);
     }
 
-
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil updateCarRent(@RequestBody CarRentDTO dto) {
+        service.updateCarRent(dto);
+        return new ResponseUtil("OK", "Updated", null);
+    }
 }
