@@ -5,12 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * `@authority` Chathushka Madumal
@@ -40,5 +39,6 @@ public class Customer {
     @OneToOne(cascade = CascadeType.ALL)
     private User users;
 
-
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+    private List<Payment> payments = new ArrayList<>();
 }
