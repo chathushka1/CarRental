@@ -80,7 +80,8 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public String generateCarIds() {
-        return null;
+        return carRepo.generateCarId();
+
     }
 
     @Override
