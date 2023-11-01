@@ -101,7 +101,6 @@ public class CarController {
         return new ResponseUtil("Ok","Successfully Searched.",carService.sortAccordingToMonthlyRatePriceByDescending());
     }
 
-    /**********/
     @GetMapping(path = "/schByTransmission/{type}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseUtil findByTransmissionType(@PathVariable("type") String type){
         return new ResponseUtil("Ok","Successfully Searched.",carService.findByTransmissionType(type));
@@ -129,9 +128,6 @@ public class CarController {
     public ResponseUtil findByColour(@PathVariable("colour") String colour){
         return new ResponseUtil("Ok","Successfully Searched.",carService.findByColour(colour));
     }
-
-
-    /*********************/
 
     @GetMapping(path = "/countOfAvailableCars/{availability}")
     public ResponseUtil noOfAvailableOrReservedCars(@PathVariable("availability") String availability){

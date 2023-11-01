@@ -302,4 +302,23 @@ $("#btnGenerateID").click(function () {
     generateUserIds();
 });
 
+$("#btnCusUpdate").click(function () {
+    let formData = new FormData($("#customerForm")[0]);
+    console.log(formData);
+    $.ajax({
+        url: BASE_URL + "customer/update",
+        method: "post",
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (res) {
+            console.log(res)
+
+        },
+        error: function (error) {
+            console.log(error);
+        }
+    });
+});
+
 
