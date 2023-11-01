@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDate;
+
 /**
  * `@authority` Chathushka Madumal
  * hp
@@ -38,5 +40,6 @@ public class CarDTO {
     private String backViewImage;
     private String sideViewImage;
     private String interiorViewImage;
+    private LocalDate carRegisteredDate;
 
 }

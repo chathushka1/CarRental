@@ -185,10 +185,18 @@
                                     <input type="text" name="vWholeKm" class="form-control" id="txtWholeKm">
                                 </div>
 
+
                                 <div class="col-md-6 mb3">
                                     <label for="txtUnderMaintain" class="text-black form-label">Under Maintain ?</label>
                                     <!--<input type="text" name="vUnderMaintain" class="form-control" id="txtUnderMaintain">-->
                                     <select aria-label="Default select example" class="form-select fs-5" style="height: 38px" id="txtUnderMaintain">
+                                        <option value="1">Yes</option>
+                                        <option value="2">No</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb3">
+                                    <label for="txtVehicleDamage" class="text-black form-label">Damage ?</label>
+                                    <select aria-label="Default select example" class="form-select fs-5" style="height: 38px" id="txtVehicleDamage">
                                         <option value="1">Yes</option>
                                         <option value="2">No</option>
                                     </select>
@@ -225,9 +233,9 @@
 
 
 
-                                <button id="btnDriverSave" type="button" style="width: 150px" class="btn btn-success m-auto m-lg-2 justify-content-center" >Save</button>
-                                <button id="btnDriverUpdate" type="button" style="width: 150px" class="btn btn-info m-auto m-lg-2">Update</button>
-                                <button id="btnDriverDelete" type="button" style="width: 150px" class="btn btn-danger m-auto m-lg-2">Delete</button>
+                                <button id="btnCarSave" type="button" style="width: 150px" class="btn btn-success m-auto m-lg-2 justify-content-center" >Save</button>
+                                <button id="btnCarUpdate" type="button" style="width: 150px" class="btn btn-info m-auto m-lg-2">Update</button>
+                                <button id="btnCarDelete" type="button" style="width: 150px" class="btn btn-danger m-auto m-lg-2">Delete</button>
 
                             </form>
                         </div>
@@ -241,5 +249,7 @@
 </div>
 <script src="../assets/js/bootstrap.js"></script>
 <script src="../assets/js/jquery-3.6.1.min.js"></script>
+<script src="../controllers/CarRegisterController.js"></script>
+
 </body>
 </html>
