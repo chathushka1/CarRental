@@ -15,8 +15,14 @@ $("#btnDriverSave").click(function (){
 });
 
 function saveDriver(){
+    var userrs={
+    userId:$("#generateUserId").text(),
+    username:$("#txtDriverUserName").val(),
+    password:$("#txtDriverPassword").val(),
+}
     var driverDetails= {
         dId: $("#generateDriverId").text(),
+        userDTO:userrs,
         dName :$("#txtDriverName").val(),
         dAddress :$("#txtDriverAddress").val(),
         dContact: $("#txtDriverContact").val(),
@@ -34,6 +40,7 @@ function saveDriver(){
         success:function (resp) {
             if (resp.message==200){
                 generateDriverRegisterIds();
+                registerDriverUser(userrs);
                 saveDriver();
             }
             alert("Ok");
@@ -78,11 +85,12 @@ function generateDriverRegisterIds() {
 }
 $("#btnGenerateDriverID").click(function () {
     generateDriverRegisterIds();
+    generateUserIds();
 });
 
 
-function registerUser(users){
-    var user={
+function registerDriverUser(users){
+    var userDTO={
         userId:users.userId,
         username:users.username,
         password:users.password,
@@ -92,7 +100,7 @@ function registerUser(users){
         url:BASE_URL+"driver",
         method:"POST",
         contentType:"application/json",
-        data: JSON.stringify(user),
+        data: JSON.stringify(userDTO),
         success:function (resp) {
             /*  alert(resp.message);*/
             console.log(resp);
@@ -102,6 +110,35 @@ function registerUser(users){
         },
         error:function (error) {
             alert(JSON.parse(error.responseText).message);
+        }
+    });
+}
+
+
+function generateUserIds() {
+    $("#generateUserId").text("U00-0001");
+    var test = "id";
+
+    $.ajax({
+        url: BASE_URL+"user?test="+test,
+        method: "GET",
+        success: function (response) {
+            var userId = response.data;
+            var tempId = parseInt(userId.split("-")[1]);
+            tempId = tempId + 1;
+            if (tempId <= 9) {
+                $("#generateUserId").text("U00-000" + tempId);
+            } else if (tempId <= 99) {
+                $("#generateUserId").text("U00-00" + tempId);
+            } else if (tempId <= 999) {
+                $("#generateUserId").text("U00-0" + tempId);
+            } else {
+                $("#generateUserId").text("U00-" + tempId);
+            }
+
+        },
+        error: function (ob, statusText, error) {
+
         }
     });
 }

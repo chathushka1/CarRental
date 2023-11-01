@@ -28,4 +28,6 @@ public class DriverDTO {
     private String dLicenseNumber;
     private String dLicensePhoto;
     private LocalDate dRegisteredDate;
+
+    private UserDTO userDTO;
 }

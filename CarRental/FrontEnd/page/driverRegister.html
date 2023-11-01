@@ -102,8 +102,8 @@
                             <form class="row p-4 m-0 m-lg-2  justify-content-center" id="driverForm">
                                 <div class="mb-3">
                                     <!--col-md-6 mb3-->
-                                    <label for="txtDriverID" class="text-black form-label" id="dId">Driver Id</label>
-                                    <input type="text" name="dId" class="form-control" id="txtDriverID" aria-describedby="emailHelp">
+                                    <label for="generateDriverId" class="text-black form-label" id="dId">Driver Id</label>
+                                    <input type="text" name="dId" class="form-control" id="generateDriverId" aria-describedby="emailHelp">
                                 </div>
                                 <div class="mb-3">
                                     <label for="txtDriverName" class="text-black form-label">Driver Name</label>
@@ -134,7 +134,16 @@
                                     <input type="text" name="dDrivingLicensePhoto" class="form-control" id="txtDDrivingLicensePhoto">
                                 </div>
 
+                                <div class="col-md-6 mb3">
+                                    <label for="txtDriverUserName" class="text-black form-label">User Name</label>
+                                    <input type="text"  class="form-control" id="txtDriverUserName">
+                                </div>
+                                <div class="col-md-6 mb3">
+                                    <label for="txtDriverPassword" class="text-black form-label">Password</label>
+                                    <input type="text"  class="form-control" id="txtDriverPassword">
+                                </div>
 
+                                <label class="form-label text-danger visually-hidden" id="generateUserId"></label>
 
                                 <button id="btnDriverSave" type="button" style="width: 150px" class="btn btn-success m-auto m-lg-2 justify-content-center" >Save</button>
                                 <button id="btnDriverUpdate" type="button" style="width: 150px" class="btn btn-info m-auto m-lg-2">Update</button>
