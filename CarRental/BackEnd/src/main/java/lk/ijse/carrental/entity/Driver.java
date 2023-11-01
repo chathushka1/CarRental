@@ -37,8 +37,10 @@ public class Driver {
     private String dLicensePhoto;
     private LocalDate dRegisteredDate;
 
+/*
     @OneToMany(mappedBy = "driver",cascade = CascadeType.ALL)
     private List<CarRent> rentals = new ArrayList<>();
+*/
 
 
 }

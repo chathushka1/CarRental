@@ -1,6 +1,12 @@
-const BASE_URL = "http://localhost:8080/BackEnd_war/";
+const BASE_URL = "http://localhost:8081/BackEnd_war/";
 
 
+
+var now = new Date();
+
+var day = ("0" + now.getDate()).slice(-2);
+var month = ("0" + (now.getMonth() + 1)).slice(-2);
+var today = now.getFullYear() + "-" + (month) + "-" + (day);
 
 $("#btnDriverSave").click(function (){
     alert("Saved");
@@ -10,7 +16,7 @@ $("#btnDriverSave").click(function (){
 
 function saveDriver(){
     var driverDetails= {
-        dId: $("#txtDriverID").val(),
+        dId: $("#generateDriverId").text(),
         dName :$("#txtDriverName").val(),
         dAddress :$("#txtDriverAddress").val(),
         dContact: $("#txtDriverContact").val(),
@@ -44,7 +50,7 @@ function saveDriver(){
 
 function generateDriverRegisterIds() {
     $("#generateDriverId").text("D00-0001");
-    var test = "id";
+    var test = "dId";
 
     $.ajax({
 
@@ -73,3 +79,29 @@ function generateDriverRegisterIds() {
 $("#btnGenerateDriverID").click(function () {
     generateDriverRegisterIds();
 });
+
+
+function registerUser(users){
+    var user={
+        userId:users.userId,
+        username:users.username,
+        password:users.password,
+    }
+
+    $.ajax({
+        url:BASE_URL+"driver",
+        method:"POST",
+        contentType:"application/json",
+        data: JSON.stringify(user),
+        success:function (resp) {
+            /*  alert(resp.message);*/
+            console.log(resp);
+            if (resp.message==200){
+            }
+
+        },
+        error:function (error) {
+            alert(JSON.parse(error.responseText).message);
+        }
+    });
+}

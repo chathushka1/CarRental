@@ -1,4 +1,4 @@
-let BASE_URL = "http://localhost:8080/BackEnd_war/";
+let BASE_URL = "http://localhost:8081/BackEnd_war/";
 
 //add customer event
 $("#btnCusSave").click(function (){
@@ -47,51 +47,6 @@ var now = new Date();
 var day = ("0" + now.getDate()).slice(-2);
 var month = ("0" + (now.getMonth() + 1)).slice(-2);
 var today = now.getFullYear() + "-" + (month) + "-" + (day);
-/*
-
-function saveCustomer(){
-    var user={
-        userId:$("#generateUserId").text(),
-        username:$("#txtCustomerUserName").val(),
-        password:$("#txtCustomerPassword").val()
-    }
-    var cusDetails= {
-        cId: $("#generateCusId").text(),
-        users:user,
-        date:today.toString(),
-        name :$("#txtCustomerName").val(),
-        address :$("#txtCustomerAddress").val(),
-        eMail: $("#txtCusEmail").val(),
-        contact: $("#txtCusContact").val(),
-        nic:$("#txtCusNic").val(),
-        licenseNumber: $("#txtCusDrivingLicense").val(),
-        nicPhoto: $("#txtCusNicPhoto").val(),
-        licensePhoto: $("#txtCusDrivingLicenPhoto").val()
-    }
-
-    $.ajax({
-        url:BASE_URL+"customer",
-        method:"POST",
-        contentType:"application/json",
-        data: JSON.stringify(cusDetails),
-        success:function (resp) {
-            if (resp.message==200){
-                registerUser(user);
-                generateRegisterIds();
-                generateUserIds();
-                alert(resp.message);
-
-            }
-
-        },
-        error:function (error) {
-            console.log(error);
-            alert("Error");
-        }
-    });
-
-}
-*/
 
 function register(){
     var user={
