@@ -5,6 +5,7 @@ import lk.ijse.carrental.dto.DriverDTO;
 import lk.ijse.carrental.service.DriverService;
 import lk.ijse.carrental.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,51 +22,85 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class DriverController {
     @Autowired
-    DriverService driverService;
-
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil addDriver(@RequestBody DriverDTO dto){
-        driverService.addDriver(dto);
-        return new ResponseUtil("Ok", "Successfully Registered.",null);
-    }
-    @GetMapping(path = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil findDriver(@PathVariable String id){
-        return new ResponseUtil("Ok", "Successfully Searched.",driverService.findDriver(id));
-    }
-
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil updateDriver(@RequestBody DriverDTO dto){
-        driverService.updateDriver(dto);
-        return new ResponseUtil("Ok", "Successfully Updated.",null);
-    }
-
-    @DeleteMapping(params = {"id"},produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil deleteDriver(@RequestParam String id){
-        driverService.deleteDriver(id);
-        return new ResponseUtil("Ok", "Successfully Deleted.",null);
-    }
+    DriverService service;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil getAllDriver(){
-        return new ResponseUtil("Ok", "Successfully Searched.",driverService.getAllDriver());
-    }
-    @GetMapping(params = {"test"})
-    public ResponseUtil generateCustomerIds(@RequestParam String test) {
-        return new ResponseUtil("Ok", "Successfully Searched.",driverService.generateDriverIds());
+    public ResponseUtil getAllDrivers() {
+        return new ResponseUtil("OK", "Ok", service.getAllDrivers());
     }
 
-    @GetMapping(path ="/COUNT/{count}")
-    public ResponseUtil countRegisteredDriver(@PathVariable String count) {
-        return new ResponseUtil("Ok", "Successfully Searched.",driverService.countRegisteredDrivers());
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil saveDriver(@RequestBody DriverDTO dto) {
+        System.out.println(dto.toString());
+        service.saveDriver(dto);
+        return new ResponseUtil("OK", "Saved", null);
     }
 
-    @GetMapping(path = "USER/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil searchUserFromDriver(@PathVariable("id") String id){
-        return new ResponseUtil("Ok", "Successfully Searched.",driverService.findDriver(id));
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil updateCustomer(@RequestBody DriverDTO dto) {
+        service.updateDriver(dto);
+        return new ResponseUtil("OK", "Updated", null);
     }
 
-    @GetMapping(path = "/findValidNic/{nic}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil findDriverToReserve(@PathVariable("nic") String nic){
-        return new ResponseUtil("Ok", "Successfully Searched.",driverService.findDriverToReserve(nic));
+    @DeleteMapping(params = {"licenceNo"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil deleteDriver(@RequestParam String licenceNo) {
+        service.deleteDriver(licenceNo);
+        return new ResponseUtil("OK", "Deleted", null);
+    }
+
+    @GetMapping(path = "/{licenceNo}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil searchDriver(@PathVariable String licenceNo) {
+        return new ResponseUtil("OK", "Ok", service.searchDriver(licenceNo));
+    }
+
+    @GetMapping(path = "/{username}/{password}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil searchDriverByUsernameAndPassword(@PathVariable String username, @PathVariable String password) {
+        if (service.findDriverByUsername(username)) {
+            if (service.findDriverByPassword(password)) {
+                return new ResponseUtil("OK", "Login Successful", true);
+            } else {
+                return new ResponseUtil("OK", "Incorrect Password", false);
+            }
+        } else {
+            return new ResponseUtil("OK", "Incorrect Username", false);
+        }
+    }
+
+    @GetMapping(path = "/set/{username}/{password}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil findDriverByUsernameAndPassword(@PathVariable String username, @PathVariable String password) {
+        return new ResponseUtil("OK", "Ok", service.findDriverByUsernameAndPassword(username, password));
+    }
+
+    @PutMapping(path = "/updateAvailable/{licenceNo}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil updateDriverAvailable(@PathVariable String licenceNo){
+        service.updateDriverAvailable(licenceNo);
+        return new ResponseUtil("OK","Updated",null);
+    }
+
+    @PutMapping(path = "/updateNonAvailable/{licenceNo}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil updateDriverNonAvailable(@PathVariable String licenceNo){
+        service.updateDriverNonAvailable(licenceNo);
+        return new ResponseUtil("OK","Ok",null);
+    }
+
+    @GetMapping(path = "/getAllAvailableDrivers",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil getAllAvailableDrivers(){
+        return new ResponseUtil("OK","Ok",service.getAllAvailableDrivers());
+    }
+
+    @GetMapping(path = "/getAllNonAvailableDrivers",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil getAllNonAvailableDrivers(){
+        return new ResponseUtil("OK","Ok",service.getAllNonAvailableDrivers());
+    }
+
+    @GetMapping(path = "/count/{availability}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil getCountOfCustomersByAvailability(@PathVariable boolean availability){
+        return new ResponseUtil("OK","Ok",service.getCountOfDriversByStatus(availability));
+    }
+
+    @GetMapping(path = "/getRandomDriver",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil getRandomDriver(){
+        return new ResponseUtil("OK","Ok",service.getRandomDriver());
     }
 }

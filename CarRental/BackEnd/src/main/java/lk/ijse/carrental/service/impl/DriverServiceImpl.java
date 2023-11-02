@@ -24,73 +24,108 @@ import java.util.List;
 public class DriverServiceImpl implements DriverService {
 
     @Autowired
-    DriverRepo driverRepo;
+    DriverRepo repo;
 
     @Autowired
     ModelMapper mapper;
 
+
     @Override
-    public void addDriver(DriverDTO dto) {
-        if (!driverRepo.existsById(dto.getDId())) {
-            driverRepo.save(mapper.map(dto, Driver.class));
+    public void saveDriver(DriverDTO dto) {
+        if (!repo.existsById(dto.getLicenceNo())) {
+            repo.save(mapper.map(dto, Driver.class));
         } else {
-            throw new RuntimeException(dto.getDId() + "Driver Already Exists !!!");
+            throw new RuntimeException("Driver Already Exists");
         }
     }
 
     @Override
-    public void deleteDriver(String id) {
-        if (driverRepo.existsById(id)) {
-            driverRepo.deleteById(id);
+    public void updateDriver(DriverDTO dto) {
+        if (repo.existsById(dto.getLicenceNo())) {
+            repo.save(mapper.map(dto, Driver.class));
         } else {
-            throw new RuntimeException(id + "No Please Check The Correct Id..!");
+            throw new RuntimeException("No Such Driver To Update");
         }
     }
 
     @Override
-    public List<DriverDTO> getAllDriver() {
-        List<Driver> all = driverRepo.findAll();
-        return mapper.map(all, new TypeToken<List<DriverDTO>>() {}.getType());
-    }
-
-    @Override
-    public DriverDTO findDriver(String id) {
-        if (driverRepo.existsById(id)) {
-            Driver driver = driverRepo.findById(id).get();
-            return mapper.map(driver, DriverDTO.class);
+    public void deleteDriver(String licenceNo) {
+        if (repo.existsById(licenceNo)) {
+            repo.deleteById(licenceNo);
         } else {
-            throw new RuntimeException(id + "No Please Check The Correct Id..!");
+            throw new RuntimeException("No Such Driver To Delete");
         }
     }
 
     @Override
-    public void updateDriver(DriverDTO driverDTO) {
-        if (driverRepo.existsById(driverDTO.getDId())) {
-            driverRepo.save(mapper.map(driverDTO, Driver.class));
+    public DriverDTO searchDriver(String licenceNo) {
+        if (repo.existsById(licenceNo)) {
+            return mapper.map(repo.findById(licenceNo).get(), DriverDTO.class);
         } else {
-            throw new RuntimeException(driverDTO.getDId() + "No Please Check The Correct Id..!");
+            throw new RuntimeException("Driver Not Found...");
         }
     }
 
     @Override
-    public String generateDriverIds() {
-        return driverRepo.generateDId();
+    public List<DriverDTO> getAllDrivers() {
+        return mapper.map(repo.findAll(), new TypeToken<List<DriverDTO>>() {
+        }.getType());
     }
 
     @Override
-    public int countRegisteredDrivers() {
-        return driverRepo.registeredDriverCount();
+    public boolean findDriverByUsername(String username) {
+        return repo.findDriverByUsername(username).isPresent();
     }
 
     @Override
-    public DriverDTO searchUserFromDriver(String id) {
-        Driver driver = driverRepo.searchDriver(id);
-        return mapper.map(driver, DriverDTO.class);
+    public boolean findDriverByPassword(String password) {
+        return repo.findDriverByPassword(password).isPresent();
     }
 
     @Override
-    public DriverDTO findDriverToReserve(String nic) {
-        Driver driver = driverRepo.searchDriver(nic);
-        return mapper.map(driver, DriverDTO.class);
+    public DriverDTO findDriverByUsernameAndPassword(String username, String password) {
+        return mapper.map(repo.findDriverByUsernameAndPassword(username, password).get(), DriverDTO.class);
     }
+
+    @Override
+    public void updateDriverNonAvailable(String licenceNo) {
+        if (repo.existsById(licenceNo)) {
+            repo.updateDriverNonAvailable(licenceNo);
+        } else {
+            throw new RuntimeException("Driver Not Found...");
+        }
+    }
+
+    @Override
+    public void updateDriverAvailable(String licenceNo) {
+        if (repo.existsById(licenceNo)) {
+            repo.updateDriverAvailable(licenceNo);
+        } else {
+            throw new RuntimeException("Driver Not Found...");
+        }
+    }
+
+    @Override
+    public List<DriverDTO> getAllAvailableDrivers() {
+        return mapper.map(repo.getAllAvailableDrivers(), new TypeToken<List<DriverDTO>>() {
+        }.getType());
+    }
+
+    @Override
+    public List<DriverDTO> getAllNonAvailableDrivers() {
+        return mapper.map(repo.getAllNonAvailableDrivers(), new TypeToken<List<DriverDTO>>() {
+        }.getType());
+    }
+
+    @Override
+    public int getCountOfDriversByStatus(boolean availability) {
+        return repo.getCountOfDriversByStatus(availability);
+    }
+
+    @Override
+    public List<DriverDTO> getRandomDriver() {
+        return mapper.map(repo.getRandomDriver(), new TypeToken<List<DriverDTO>>() {
+        }.getType());
+    }
+
 }

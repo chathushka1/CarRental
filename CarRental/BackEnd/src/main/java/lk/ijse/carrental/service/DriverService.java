@@ -13,16 +13,31 @@ import java.util.List;
  * FrontEnd
  */
 public interface DriverService {
-    void addDriver(DriverDTO dto);
-    void deleteDriver(String id);
-    List<DriverDTO> getAllDriver();
-    DriverDTO findDriver(String id);
-    void updateDriver(DriverDTO c);
-    String generateDriverIds();
+    void saveDriver(DriverDTO dto);
 
-    int countRegisteredDrivers();
+    void updateDriver(DriverDTO dto);
 
-    DriverDTO searchUserFromDriver(String id);
+    void deleteDriver(String licenceNo);
 
-    DriverDTO findDriverToReserve(String nic);
+    DriverDTO searchDriver(String licenceNo);
+
+    List<DriverDTO> getAllDrivers();
+
+    boolean findDriverByUsername(String username);
+
+    boolean findDriverByPassword(String password);
+
+    DriverDTO findDriverByUsernameAndPassword(String username, String password);
+
+    void updateDriverNonAvailable(String licenceNo);
+
+    void updateDriverAvailable(String licenceNo);
+
+    List<DriverDTO> getAllAvailableDrivers();
+
+    List<DriverDTO> getAllNonAvailableDrivers();
+
+    int getCountOfDriversByStatus(boolean availability);
+
+    List<DriverDTO> getRandomDriver();
 }
