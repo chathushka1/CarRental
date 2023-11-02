@@ -19,49 +19,19 @@ public interface CarService {
 
     void updateCar(CarDTO dto);
 
-    void deleteCar(String id);
-
-    CarDTO searchCar(String id);
+    void deleteCar(String registrationNO);
 
     List<CarDTO> getAllCars();
 
-    String generateCarIds();
+    CarDTO searchCar(String registrationNO);
 
-    String searchRegNumberIsExists(String reg);
+    void updateCarStatus(String registrationNO, String status);
 
-    void carAvailableOrNot(String available, String id);
+    void updateCarFilePaths(String frontImg, String backImg, String interImg, String sideImg, String registrationID);
 
-     /*/for sort and filter/*/
+    List<CarDTO> getAllCarsByStatus(String status);
 
-    List<CarDTO> sortAccordingToPassengersByAscending();
+    int getCountOfCarsByStatus(String status);
 
-    List<CarDTO> sortAccordingToPassengersByDescending();
-
-    List<CarDTO> sortAccordingToDailyRatePriceByDescending();
-
-    List<CarDTO> sortAccordingToDailyRatePriceByAscending();
-
-    List<CarDTO> sortAccordingToMonthlyRatePriceByAscending();
-
-    List<CarDTO> sortAccordingToMonthlyRatePriceByDescending();
-
-    /*/for search by prop/*/
-
-    List<CarDTO> findByTransmissionType(String type);
-
-    List<CarDTO> findByBrand(String brand);
-
-    List<CarDTO> findByType(String type);
-
-    List<CarDTO> findByFuelType(String fuelType);
-
-    List<CarDTO> findByColour(String colour);
-
-    /*/for find Available cars/*/
-
-    int noOfAvailableOrReservedCars(String availability);
-
-    /*/for find Maintenance cars/*/
-
-    int needMaintenanceOrUnderMaintenanceCars(String maintain);
+    List<String> getCarRegistrationNumbersByType(String type);
 }

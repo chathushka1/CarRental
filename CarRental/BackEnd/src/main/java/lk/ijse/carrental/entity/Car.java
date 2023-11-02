@@ -28,29 +28,29 @@ import java.util.List;
 public class Car {
 
     @Id
-    private String carId;
-    private String registrationNo;
-    private String colour;
+    private String registrationNO;
     private String brand;
     private String type;
-    private String fuelType;
-    private String transmissionType;
     private int noOfPassengers;
-    private int freeKmForDay;
-    private int freeKmForMonth;
-    private double pricePerExtraKM;
-    private double dailyRatePrice;
-    private double monthlyRatePrice;
-    private int totalDistanceTraveled;
-    private String availableOrNot;
-    private String damageOrNot;
-    private String underMaintainOrNot;
-    private String fontViewImage;
-    private String backViewImage;
-    private String sideViewImage;
-    private String interiorViewImage;
-    private LocalDate carRegisteredDate;
+    private String transmissionType;
+    private String fuelType;
+    private String color;
+    private String frontViewImg;
+    private String backViewImg;
+    private String sideViewImg;
+    private String internalViewImg;
+    private double dailyRate;
+    private double monthlyRate;
+    private double freeKmForPrice;
+    private double freeKmForDuration;
+    private double lossDamageWaiver;
+    private double priceForExtraKm;
+    private double completeKm;
+    private String status;
 
-    /*@OneToMany(mappedBy = "carRent", cascade = CascadeType.ALL)
-    private List<CarRent> rentals = new ArrayList<>();*/
+   /* @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+    private List<CarRent> rentals = new ArrayList<>();
+
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+    private List<Maintenance> maintenances = new ArrayList<>();*/
 }

@@ -25,163 +25,80 @@ import java.util.List;
 public class CarServiceImpl implements CarService {
 
     @Autowired
-    CarRepo carRepo;
+    CarRepo repo;
 
     @Autowired
     ModelMapper mapper;
 
     @Override
     public void saveCar(CarDTO dto) {
-        if (!carRepo.existsById(dto.getCarId())) {
-            carRepo.save(mapper.map(dto, Car.class));
+        if (!repo.existsById(dto.getRegistrationNO())) {
+            repo.save(mapper.map(dto, Car.class));
         } else {
-            throw new RuntimeException(dto.getCarId() + " " + "Car Already Exists..!");
+            throw new RuntimeException("Car Already Exists");
         }
-
     }
 
     @Override
     public void updateCar(CarDTO dto) {
-        if (carRepo.existsById(dto.getCarId())) {
-            carRepo.save(mapper.map(dto, Car.class));
+        if (repo.existsById(dto.getRegistrationNO())) {
+            repo.updateCar(dto.getRegistrationNO(),dto.getBrand(),dto.getType(),dto.getNoOfPassengers(),dto.getTransmissionType(),dto.getFuelType(),dto.getColor(),dto.getDailyRate(),dto.getMonthlyRate(),dto.getFreeKmForPrice(),dto.getFreeKmForDuration(),dto.getLossDamageWaiver(),dto.getPriceForExtraKm(),dto.getCompleteKm());
         } else {
-            throw new RuntimeException(dto.getCarId() + " " + "No Such Car..! Please Check The Car ..!");
+            throw new RuntimeException("No Such Car To Update");
         }
-
     }
 
     @Override
-    public void deleteCar(String id) {
-        if (carRepo.existsById(id)) {
-            carRepo.deleteById(id);
+    public void deleteCar(String registrationNO) {
+        if (repo.existsById(registrationNO)) {
+            repo.deleteById(registrationNO);
         } else {
-            throw new RuntimeException(id + " " + "No Such Car..! Please Check The Correct Id..!");
+            throw new RuntimeException("No Such Car To Delete");
         }
-
-    }
-
-    @Override
-    public CarDTO searchCar(String id) {
-        if (carRepo.existsById(id)) {
-            Car car = carRepo.findById(id).get();
-            return mapper.map(car, CarDTO.class);
-        } else {
-            throw new RuntimeException(id + " " + "No Such Car..! Please Check The Correct Id..!");
-        }
-
     }
 
     @Override
     public List<CarDTO> getAllCars() {
-        List<Car> carList = carRepo.findAll();
-        return mapper.map(carList,new TypeToken<List<CarDTO>>(){}.getType());
-
+        return mapper.map(repo.findAll(), new TypeToken<List<CarDTO>>() {
+        }.getType());
     }
 
     @Override
-    public String generateCarIds() {
-        return carRepo.generateCarId();
-
+    public CarDTO searchCar(String registrationNO) {
+        return mapper.map(repo.findById(registrationNO).get(), CarDTO.class);
     }
 
     @Override
-    public String searchRegNumberIsExists(String reg) {
-        return carRepo.searchRegNumberIsExists(reg);
-
-    }
-
-    @Override
-    public void carAvailableOrNot(String available, String id) {
-        carRepo.carAvailableOrNot(available,id);
-
-    }
-
-    @Override
-    public List<CarDTO> sortAccordingToPassengersByAscending() {
-        List<Car>cars=carRepo.sortAccordingToPassengersByDescending();
-        return mapper.map(cars,new TypeToken<List<CarDTO>>(){}.getType());
-
-    }
-
-    @Override
-    public List<CarDTO> sortAccordingToPassengersByDescending() {
-        List<Car> cars=carRepo.sortAccordingToPassengersByAscending();
-        return mapper.map(cars,new TypeToken<List<CarDTO>>(){}.getType());
-
-    }
-
-    @Override
-    public List<CarDTO> sortAccordingToDailyRatePriceByDescending() {
-        List<Car> cars=carRepo.sortAccordingToDailyRatePriceByDescending();
-        return mapper.map(cars,new TypeToken<List<CarDTO>>(){}.getType());
-
-    }
-
-    @Override
-    public List<CarDTO> sortAccordingToDailyRatePriceByAscending() {
-        List<Car> cars=carRepo.sortAccordingToDailyRatePriceByAscending();
-        return mapper.map(cars,new TypeToken<List<CarDTO>>(){}.getType());
-
-    }
-
-    @Override
-    public List<CarDTO> sortAccordingToMonthlyRatePriceByAscending() {
-        List<Car>cars=carRepo.sortAccordingToMonthlyRatePriceByAscending();
-        return mapper.map(cars,new TypeToken<List<CarDTO>>(){}.getType());
-
-    }
-
-    @Override
-    public List<CarDTO> sortAccordingToMonthlyRatePriceByDescending() {
-        List<Car>cars=carRepo.sortAccordingToMonthlyRatePriceByDescending();
-        return mapper.map(cars,new TypeToken<List<CarDTO>>(){}.getType());
-
-    }
-
-    @Override
-    public List<CarDTO> findByTransmissionType(String type) {
-        List<Car>all=carRepo.findByTransmissionType(type);
-        return mapper.map(all,new TypeToken<List<CarDTO>>(){}.getType());
-
-    }
-
-    @Override
-    public List<CarDTO> findByBrand(String brand) {
-        List<Car>all=carRepo.findByBrand(brand);
-        return mapper.map(all,new TypeToken<List<CarDTO>>(){}.getType());
-
-    }
-
-    @Override
-    public List<CarDTO> findByType(String type) {
-        List<Car>all=carRepo.findByType(type);
-        return mapper.map(all,new TypeToken<List<CarDTO>>(){}.getType());
-
-    }
-
-    @Override
-    public List<CarDTO> findByFuelType(String fuelType) {
-        List<Car>all=carRepo.findByFuelType(fuelType);
-        return mapper.map(all,new TypeToken<List<CarDTO>>(){}.getType());
-
-    }
-
-    @Override
-    public List<CarDTO> findByColour(String colour) {
-        List<Car>all=carRepo.findByColour(colour);
-        return mapper.map(all,new TypeToken<List<CarDTO>>(){}.getType());
-
-    }
-
-    @Override
-    public int noOfAvailableOrReservedCars(String availability) {
-        return carRepo.noOfAvailableOrReservedCars(availability);
-
-    }
-
-    @Override
-    public int needMaintenanceOrUnderMaintenanceCars(String maintain) {
-            return carRepo.needMaintenanceOrUnderMaintenanceCars(maintain);
-
+    public void updateCarStatus(String registrationNO, String status) {
+        if (repo.existsById(registrationNO)) {
+            repo.updateCarStatus(status, registrationNO);
+        } else {
+            throw new RuntimeException("No Such Car To Update");
         }
+    }
+
+    @Override
+    public void updateCarFilePaths(String frontImg, String backImg, String interImg, String sideImg, String registrationID) {
+        if (repo.existsById(registrationID)) {
+            repo.updateCarFilePaths(frontImg, backImg, interImg, sideImg, registrationID);
+        } else {
+            throw new RuntimeException("No Such Car To Update");
+        }
+    }
+
+    @Override
+    public List<CarDTO> getAllCarsByStatus(String status) {
+        return mapper.map(repo.getAllCarsByStatus(status), new TypeToken<List<CarDTO>>() {
+        }.getType());
+    }
+
+    @Override
+    public int getCountOfCarsByStatus(String status) {
+        return repo.getCountOfCarsByStatus(status);
+    }
+
+    @Override
+    public List<String> getCarRegistrationNumbersByType(String type) {
+        return repo.getCarRegistrationNoByType(type);
+    }
 }

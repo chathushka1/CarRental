@@ -4,8 +4,13 @@ import lk.ijse.carrental.dto.CarDTO;
 import lk.ijse.carrental.service.CarService;
 import lk.ijse.carrental.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 
 
 /**
@@ -21,121 +26,81 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class CarController {
     @Autowired
-    CarService carService;
+    CarService service;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil getAllCar(){
-        return new ResponseUtil("Ok", "Successfully Searched.",carService.getAllCars());
+    public ResponseUtil getAllCars() {
+        return new ResponseUtil("Ok", "Ok", service.getAllCars());
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil saveCar(@RequestBody CarDTO carDTO){
-        carService.saveCar(carDTO);
-        return new ResponseUtil("Ok", "Successfully Saved.",null);
+    public ResponseUtil saveCar(@RequestBody CarDTO dto) {
+        service.saveCar(dto);
+        return new ResponseUtil("Ok", "Saved", null);
     }
 
-    @DeleteMapping(params = {"id"},produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil deleteCar(@RequestParam String id){
-        carService.deleteCar(id);
-        return new ResponseUtil("Ok", "Successfully Deleted.",null);
+    @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil updateCar(@RequestBody CarDTO dto) {
+        service.updateCar(dto);
+        return new ResponseUtil("Ok", "Updated", null);
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil updateCar(@RequestBody CarDTO carDTO){
-        carService.updateCar(carDTO);
-        return new ResponseUtil("Ok", "Successfully Updated.",null);
+    @DeleteMapping(params = {"registrationNo"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil deleteCar(@RequestParam String registrationNo) {
+        service.deleteCar(registrationNo);
+        return new ResponseUtil("Ok", "deleted", null);
     }
 
-    @GetMapping(path = "/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil searchCar(@PathVariable("id") String id){
-        return new ResponseUtil("Ok", "Successfully Searched.",carService.searchCar(id));
+    @GetMapping(path = "/{registrationNo}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil searchCar(@PathVariable String registrationNo) {
+        return new ResponseUtil("Ok", "Ok", service.searchCar(registrationNo));
     }
 
-    @GetMapping(params = {"test"})
-    public ResponseUtil generateCarIds(@RequestParam String test) {
-        return new ResponseUtil("Ok", "Successfully Searched.",carService.generateCarIds());
+    @PutMapping(path = "/updateCarStatus/{registrationNO}/{status}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil updateCarStatus(@PathVariable String registrationNO, @PathVariable String status) {
+        service.updateCarStatus(registrationNO, status);
+        return new ResponseUtil("Ok", "Ok", null);
     }
 
-    @GetMapping(path = "/SEARCH/{reg}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil searchRegNumberIsDuplicate(@PathVariable("reg") String reg){
-        return new ResponseUtil("Ok", "Successfully Searched.",carService.searchRegNumberIsExists(reg));
+    @GetMapping(path = "/getByStatus/{status}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil getAllCarsByStatus(@PathVariable String status) {
+        return new ResponseUtil("Ok", "Ok", service.getAllCarsByStatus(status));
     }
 
-    @GetMapping(path = "/AVAILABLE/{available}/{carId}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil carAvailableOrNot(@PathVariable("available") String available, @PathVariable("carId") String carId) {
-        carService.carAvailableOrNot(available,carId);
-        return new ResponseUtil("Ok", "Successfully Searched.",null);
+    @GetMapping(path = "/count/{status}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil getCountOfCarsByStatus(@PathVariable String status) {
+        return new ResponseUtil("Ok", "Ok", service.getCountOfCarsByStatus(status));
     }
 
+    @PutMapping(path = "/up/{registrationID}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil uploadImagesAndPath(@RequestPart("frontImg") MultipartFile frontImg, @RequestPart("backImg") MultipartFile backImg, @RequestPart("interImg") MultipartFile interImg, @RequestPart("sideImg") MultipartFile sideImg, @PathVariable String registrationID) {
+        try {
+            String projectPath = String.valueOf(new File("H:\\Github Projects\\Easy-Car-Rental\\Car-Rental-FontEnd\\assets\\savedImages"));
+            File uploadsDir = new File(projectPath + "\\Cars");
+            uploadsDir.mkdir();
+            frontImg.transferTo(new File(uploadsDir.getAbsolutePath() + "\\" + frontImg.getOriginalFilename()));
+            backImg.transferTo(new File(uploadsDir.getAbsolutePath() + "\\" + backImg.getOriginalFilename()));
+            interImg.transferTo(new File(uploadsDir.getAbsolutePath() + "\\" + interImg.getOriginalFilename()));
+            sideImg.transferTo(new File(uploadsDir.getAbsolutePath() + "\\" + sideImg.getOriginalFilename()));
 
-    @GetMapping(path = "/sortPassengerAsc/{passengerAscending}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil sortAccordingToPassengersByAscending(@PathVariable("passengerAscending") String passengerAscending) {
-        return new ResponseUtil("Ok", "Successfully Searched.",carService.sortAccordingToPassengersByAscending());
+            String frontImgPath = projectPath + "\\Cars\\" + frontImg.getOriginalFilename();
+            String backImgPath = projectPath + "\\Cars\\" + backImg.getOriginalFilename();
+            String interImgPath = projectPath + "\\Cars\\" + interImg.getOriginalFilename();
+            String sideImgPath = projectPath + "\\Cars\\" + sideImg.getOriginalFilename();
+
+            service.updateCarFilePaths(frontImgPath, backImgPath, interImgPath, sideImgPath, registrationID);
+
+            return new ResponseUtil("Ok", "Uploaded", null);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseUtil("Ok", "Error", null);
+        }
     }
 
-
-    @GetMapping(path = "/sortPassengerDsc/{passengerDscending}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil sortAccordingToPassengersByDescending(@PathVariable("passengerDscending") String passengerDscending) {
-        return new ResponseUtil("Ok", "Successfully Searched.",carService.sortAccordingToPassengersByDescending());
+    @GetMapping(path = "/getRegNo/{type}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseUtil getCarRegistrationNoByType(@PathVariable String type){
+        return new ResponseUtil("Ok","Ok",service.getCarRegistrationNumbersByType(type));
     }
-
-
-    @GetMapping(path = "/sortDailyRateAsc/{dailyRateAsc}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil sortAccordingToDailyRatePriceByAscending(@PathVariable("dailyRateAsc") String dailyRateAsc) {
-        return new ResponseUtil("Ok", "Successfully Searched.",carService.sortAccordingToDailyRatePriceByAscending());
-    }
-
-    @GetMapping(path = "/sortDailyRateDsc/{dailyRateDsc}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil sortAccordingToDailyRatePriceByDescending(@PathVariable("dailyRateDsc") String dailyRateDsc) {
-        return new ResponseUtil("Ok", "Successfully Searched.",carService.sortAccordingToDailyRatePriceByDescending());
-    }
-
-    @GetMapping(path = "/sortMonthlyRateAsc/{monthlyRateAsc}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil sortAccordingToMonthlyRatePriceByAscending(@PathVariable("monthlyRateAsc") String monthlyRateAsc) {
-        return new ResponseUtil("Ok", "Successfully Searched.",carService.sortAccordingToMonthlyRatePriceByAscending());
-    }
-
-
-    @GetMapping(path = "/sortMonthlyRateDsc/{monthlyRateDsc}" ,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil sortAccordingToMonthlyRatePriceByDescending(@PathVariable("monthlyRateDsc") String monthlyRateDsc){
-        return new ResponseUtil("Ok","Successfully Searched.",carService.sortAccordingToMonthlyRatePriceByDescending());
-    }
-
-    @GetMapping(path = "/schByTransmission/{type}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil findByTransmissionType(@PathVariable("type") String type){
-        return new ResponseUtil("Ok","Successfully Searched.",carService.findByTransmissionType(type));
-    }
-
-
-    @GetMapping(path = "/schByCarType/{type}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil findByType(@PathVariable("type") String type){
-        return new ResponseUtil("Ok","Successfully Searched.",carService.findByType(type));
-    }
-
-
-    @GetMapping(path = "/schByCarBrand/{brand}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil findByBrand(@PathVariable("brand") String brand){
-        return new ResponseUtil("Ok","Successfully Searched.",carService.findByBrand(brand));
-    }
-
-
-    @GetMapping(path = "/schByFuelType/{fuelType}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil findByFuelType(@PathVariable("fuelType") String fuelType){
-        return new ResponseUtil("Ok","Successfully Searched.",carService.findByFuelType(fuelType));
-    }
-
-    @GetMapping(path = "/schByColour/{colour}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseUtil findByColour(@PathVariable("colour") String colour){
-        return new ResponseUtil("Ok","Successfully Searched.",carService.findByColour(colour));
-    }
-
-    @GetMapping(path = "/countOfAvailableCars/{availability}")
-    public ResponseUtil noOfAvailableOrReservedCars(@PathVariable("availability") String availability){
-        return new ResponseUtil("Ok","Successfully Searched.",carService.noOfAvailableOrReservedCars(availability));
-    }
-
-    @GetMapping(path = "/carMaintain/{maintain}")
-    public ResponseUtil needMaintenanceOrUnderMaintenanceCars(@PathVariable("maintain") String maintain){
-        return new ResponseUtil("Ok","Successfully Searched.",carService.needMaintenanceOrUnderMaintenanceCars(maintain));
-}
 }
