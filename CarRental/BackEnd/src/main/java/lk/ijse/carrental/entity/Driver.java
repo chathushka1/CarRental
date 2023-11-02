@@ -28,21 +28,17 @@ import java.util.List;
 public class Driver {
 
     @Id
-    private String dId;
-    private String dName;
-    private String dAddress;
-    private String dContact;
-    private String dEmail;
-    private String dLicenseNumber;
-    private String dLicensePhoto;
-    private LocalDate dRegisteredDate;
+    private String licenceNo;
+    private String name;
+    private String address;
+    private String contactNo;
+    private String nicNo;
+    private String username;
+    private String password;
+    private boolean availability;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private User users;
-/*
-    @OneToMany(mappedBy = "driver",cascade = CascadeType.ALL)
-    private List<CarRent> rentals = new ArrayList<>();
-*/
+    /*@OneToMany(mappedBy = "driver",cascade = CascadeType.ALL)
+    private List<CarRent> rentals = new ArrayList<>();*/
 
 
 }

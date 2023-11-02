@@ -20,14 +20,12 @@ import java.time.LocalDate;
 @Data
 @ToString
 public class DriverDTO {
-    private String dId;
-    private String dName;
-    private String dAddress;
-    private String dContact;
-    private String dEmail;
-    private String dLicenseNumber;
-    private String dLicensePhoto;
-    private LocalDate dRegisteredDate;
-
-    private UserDTO userDTO;
+    private String licenceNo;
+    private String name;
+    private String address;
+    private String contactNo;
+    private String nicNo;
+    private String username;
+    private String password;
+    private boolean availability;
 }

@@ -3,8 +3,13 @@ package lk.ijse.carrental.repo;
 
 import lk.ijse.carrental.entity.Driver;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * `@authority` Chathushka Madumal
@@ -15,16 +20,31 @@ import org.springframework.data.repository.query.Param;
  */
 public interface DriverRepo extends JpaRepository<Driver,String> {
 
-    @Query(value = "SELECT dId FROM Driver ORDER BY dId Desc LIMIT 1",nativeQuery = true)
-    String generateDId();
+    Optional<Driver> findDriverByUsername(String username);
 
-    @Query(value = "SELECT COUNT(*) FROM Driver",nativeQuery = true)
-    int registeredDriverCount();
+    Optional<Driver> findDriverByPassword(String password);
 
-    @Query(value = "SELECT * FROM Driver WHERE registeredDate=:date",nativeQuery = true)
-    int dailyRegisteredDriverCount(@Param("date") String date);
+    Optional<Driver> findDriverByUsernameAndPassword(String username, String password);
 
-    @Query(value = "SELECT * FROM Driver WHERE dId = :id",nativeQuery = true)
-    Driver searchDriver(@Param("id")String id);
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Driver SET availability = false WHERE licenceNo=:licenceNo", nativeQuery = true)
+    void updateDriverNonAvailable(@Param("licenceNo") String licenceNo);
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Driver SET availability = true WHERE licenceNo=:licenceNo", nativeQuery = true)
+    void updateDriverAvailable(@Param("licenceNo") String licenceNo);
+
+    @Query(value = "SELECT * FROM Driver WHERE availability=true",nativeQuery = true)
+    List<Driver> getAllAvailableDrivers();
+
+    @Query(value = "SELECT * FROM Driver WHERE availability=false",nativeQuery = true)
+    List<Driver> getAllNonAvailableDrivers();
+
+    @Query(value = "SELECT COUNT(licenceNo) FROM Driver WHERE availability=:availability",nativeQuery = true)
+    int getCountOfDriversByStatus(@Param("availability") boolean availability);
+
+    @Query(value = "SELECT * FROM Driver WHERE availability=true ORDER BY RAND() LIMIT 1",nativeQuery = true)
+    List<Driver> getRandomDriver();
 }
