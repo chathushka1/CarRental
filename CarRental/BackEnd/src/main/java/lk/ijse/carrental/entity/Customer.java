@@ -24,21 +24,24 @@ import java.util.List;
 @Data
 @ToString
 public class Customer {
-   @Id
-    private String customerId;
-    private String customerName;
-    private LocalDate registeredDate;
-    private String customerEmail;
-    private String customerNIC;
-    private String customerAddress;
-    private String customerContact;
-    private String customerDrivingLicenseId;
-    private String customerDrivingLicenseImage;
+ @Id
+ private String customerId;
+ private String name;
+ private String address;
+ private int contactNo;
+ private String email;
+ private String nicNo;
+ private String nicFrontImg;
+ private String nicBackImg;
+ private String licenceNo;
+ private String licenceImg;
+ private String username;
+ private String password;
+ private String status;
 
+/* @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+ private List<CarRent> rentals = new ArrayList<>();*/
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private User users;
-
-    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
-    private List<Payment> payments = new ArrayList<>();
+ @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL)
+ private List<Payment> payments = new ArrayList<>();
 }

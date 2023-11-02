@@ -22,14 +22,16 @@ import java.time.LocalDate;
 @ToString
 public class CustomerDTO {
     private String customerId;
-    private String customerName;
-    private LocalDate registeredDate;
-    private String customerEmail;
-    private String customerNIC;
-    private String customerAddress;
-    private String customerContact;
-    private String customerDrivingLicenseId;
-    private String customerDrivingLicenseImage;
-
-    private UserDTO users;
+    private String name;
+    private String address;
+    private int contactNo;
+    private String email;
+    private String nicNo;
+    private String nicFrontImg;
+    private String nicBackImg;
+    private String licenceNo;
+    private String licenceImg;
+    private String username;
+    private String password;
+    private String status;
 }

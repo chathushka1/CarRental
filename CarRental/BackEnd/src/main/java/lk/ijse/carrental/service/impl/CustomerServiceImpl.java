@@ -23,80 +23,125 @@ import java.util.List;
 @Service
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
+
     @Autowired
-    CustomerRepo customerRepo;
+    CustomerRepo repo;
 
     @Autowired
     ModelMapper mapper;
 
     @Override
-    public void saveCustomer(CustomerDTO customer) {
-        if (!customerRepo.existsById(customer.getCustomerId())) {
-            customerRepo.save(mapper.map(customer, Customer.class));
+    public void saveCustomer(CustomerDTO dto) {
+        if (!repo.existsById(dto.getCustomerId())) {
+            repo.save(mapper.map(dto, Customer.class));
         } else {
-            throw new RuntimeException(customer.getCustomerId() + " Customer Already Exists !!!");
-        }
-
-    }
-
-    @Override
-    public void updateCustomer(CustomerDTO customer) {
-        if (customerRepo.existsById(customer.getCustomerId())) {
-            customerRepo.save(mapper.map(customer, Customer.class));
-        } else {
-            throw new RuntimeException(customer.getCustomerId() + "No Please Check The Correct Id..!");
+            throw new RuntimeException("Customer Already Exists");
         }
     }
 
     @Override
-    public void deleteCustomer(String id) {
-        if (customerRepo.existsById(id)) {
-            customerRepo.deleteById(id);
+    public void updateCustomer(CustomerDTO dto) {
+        if (repo.existsById(dto.getCustomerId())) {
+            repo.updateCustomer(dto.getCustomerId(),dto.getName(),dto.getAddress(),dto.getEmail(),dto.getContactNo(),dto.getNicNo(),dto.getLicenceNo());
         } else {
-            throw new RuntimeException(id + "No Please Check The Correct Id..!");
+            throw new RuntimeException("No Such Customer To Update");
         }
     }
 
     @Override
-    public CustomerDTO searchCustomer(String id) {
-        if (customerRepo.existsById(id)) {
-            Customer customer = customerRepo.findById(id).get();
-            return mapper.map(customer, CustomerDTO.class);
+    public CustomerDTO searchCustomer(String customerId) {
+        if (repo.existsById(customerId)) {
+            return mapper.map(repo.findById(customerId).get(),CustomerDTO.class);
         } else {
-            throw new RuntimeException(id + "No Please Check The Correct Id..!");
+            throw new RuntimeException("No Such Customer");
+        }
+    }
+
+    @Override
+    public void deleteCustomer(String customerId) {
+        if (repo.existsById(customerId)) {
+            repo.deleteById(customerId);
+        } else {
+            throw new RuntimeException("No Such Customer To Delete");
         }
     }
 
     @Override
     public List<CustomerDTO> getAllCustomers() {
-        List<Customer> all = customerRepo.findAll();
-        return mapper.map(all, new TypeToken<List<CustomerDTO>>() {}.getType());
+        return mapper.map(repo.findAll(), new TypeToken<List<CustomerDTO>>() {
+        }.getType());
     }
 
     @Override
-    public String generateCustomerIds() {
-        return customerRepo.generateCId();
+    public boolean findCustomerByUsername(String username) {
+        return repo.findCustomerByUsername(username).isPresent();
     }
 
     @Override
-    public int countRegisteredCustomers() {
-        return customerRepo.registeredCusCount();
+    public boolean findCustomerByPassword(String password) {
+        return repo.findCustomerByPassword(password).isPresent();
     }
 
     @Override
-    public int countDailyRegisteredCustomers(String date) {
-        return customerRepo.dailyRegisteredCusCount(date);
+    public CustomerDTO findCustomerByUsernameAndPassword(String username, String password) {
+        return mapper.map(repo.findCustomerByUsernameAndPassword(username, password).get(), CustomerDTO.class);
     }
 
     @Override
-    public CustomerDTO searchUserFromCustomer(String id) {
-        Customer customer = customerRepo.searchCustomer(id);
-        return mapper.map(customer, CustomerDTO.class);
+    public String generateCustomerId() {
+        String lastId = repo.generateCustomerId();
+        String id = "";
+
+        if (lastId != null) {
+            int tempId = Integer.parseInt(lastId.split("-")[1]);
+            tempId = tempId + 1;
+            if (tempId <= 9) {
+                id = "C00-000" + tempId;
+            } else if (tempId <= 99) {
+                id = "C00-00" + tempId;
+            } else if (tempId <= 999) {
+                id = "C00-0" + tempId;
+            } else if (tempId <= 9999) {
+                id = "C00-" + tempId;
+            }
+        } else {
+            id = "C00-0001";
+        }
+        return id;
     }
 
     @Override
-    public CustomerDTO findCustomerToReserve(String nic) {
-        Customer customer = customerRepo.findCustomerToReserve(nic);
-        return mapper.map(customer, CustomerDTO.class);
+    public void updateCustomerStatus(String id) {
+        if (repo.existsById(id)) {
+            repo.updateCustomerStatus(id);
+        } else {
+            throw new RuntimeException("Customer Not Found");
+        }
+    }
+
+    @Override
+    public List<CustomerDTO> getAllPendingCustomers() {
+        return mapper.map(repo.findPendingCustomers(), new TypeToken<List<CustomerDTO>>() {
+        }.getType());
+    }
+
+    @Override
+    public List<CustomerDTO> getAllAcceptedCustomers() {
+        return mapper.map(repo.findAcceptedCustomers(), new TypeToken<List<CustomerDTO>>() {
+        }.getType());
+    }
+
+    @Override
+    public void uploadCustomerImages(String nicfPath, String nicbPath, String licenceImgPath, String id) {
+        if (repo.existsById(id)) {
+            repo.updateCustomerFilePaths(nicfPath, nicbPath, licenceImgPath, id);
+        } else {
+            throw new RuntimeException("Customer Not Found");
+        }
+    }
+
+    @Override
+    public int getCountOfCustomersRegistered() {
+        return repo.countByCustomerId();
     }
 }

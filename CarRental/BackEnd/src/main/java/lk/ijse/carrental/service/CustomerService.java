@@ -12,23 +12,31 @@ import java.util.List;
  * FrontEnd
  */
 public interface CustomerService {
-    void saveCustomer(CustomerDTO customer);
+    void saveCustomer(CustomerDTO dto);
 
-    void updateCustomer(CustomerDTO customer);
+    void updateCustomer(CustomerDTO dto);
 
-    void deleteCustomer(String id);
+    CustomerDTO searchCustomer(String customerId);
 
-    CustomerDTO searchCustomer(String id);
+    void deleteCustomer(String customerId);
 
     List<CustomerDTO> getAllCustomers();
 
-    String generateCustomerIds();
+    boolean findCustomerByUsername(String username);
 
-    int countRegisteredCustomers();
+    boolean findCustomerByPassword(String password);
 
-    int countDailyRegisteredCustomers(String date);
+    CustomerDTO findCustomerByUsernameAndPassword(String username, String password);
 
-    CustomerDTO searchUserFromCustomer(String id);
+    String generateCustomerId();
 
-    CustomerDTO findCustomerToReserve(String nic);
+    void updateCustomerStatus(String id);
+
+    List<CustomerDTO> getAllPendingCustomers();
+
+    List<CustomerDTO> getAllAcceptedCustomers();
+
+    void uploadCustomerImages(String nicfPath, String nicbPath, String licenceImgPath, String id);
+
+    int getCountOfCustomersRegistered();
 }
