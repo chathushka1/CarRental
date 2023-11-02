@@ -60,7 +60,7 @@ html body {
 }
 
 .homePage {
-    background: url("../images/2.jpg");
+    background: url("../assets/image/HomePage.jpg");
     background-size: cover;
     background-position: center;
 }
@@ -149,7 +149,7 @@ html body {
 }
 
 .login_container {
-    background: url("../images/3.jpg");
+    background: url("../assets/image/HomePage.jpg");
     background-size: cover;
     background-position: center;
 }
