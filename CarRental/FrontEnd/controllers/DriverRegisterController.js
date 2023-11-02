@@ -1,4 +1,5 @@
 const BASE_URL = "http://localhost:8081/BackEnd_war/";
+/*
 
 
 
@@ -102,7 +103,7 @@ function registerDriverUser(users){
         contentType:"application/json",
         data: JSON.stringify(userDTO),
         success:function (resp) {
-            /*  alert(resp.message);*/
+            /!*  alert(resp.message);*!/
             console.log(resp);
             if (resp.message==200){
             }
@@ -142,3 +143,4 @@ function generateUserIds() {
         }
     });
 }
+*/
