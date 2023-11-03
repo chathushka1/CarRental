@@ -665,11 +665,11 @@ function loginSave(userType, username, password) {
         ),
         success: function (res) {
             if (userType==="Admin"){
-                location.replace("AdminDashboard.html");
+                location.replace("adminDashBord.html");
             } else if (userType==="Customer"){
-                location.replace("CustomerDashboard.html");
+                location.replace("customerDashBoard.html");
             } else if (userType==="Driver"){
-                location.replace("DriverDashboard.html");
+                location.replace("driverDashboard.html");
             }
             console.log("Login data saved");
         }
