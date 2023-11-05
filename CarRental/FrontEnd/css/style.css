@@ -25,18 +25,18 @@ body{
     background: #232221;
 }
 .square3{
-    position: absolute;
-    width: 1200px;
-    height:700px;
-    left: 90px;
+
+    width: 1300px;
+    height:750px;
+    left: 0px;
     margin: auto;
     background: #232221;
 }
 
 .carImage{
-    width: 1200px;
-    height: 700px;
-    left: 65px;
+    width: 1360px;
+    height: 720px;
+    left: 0px;
 }
 
 .backgroundColor{
